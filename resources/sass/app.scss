@@ -17,3 +17,11 @@ $fa-font-path:"../webfonts";
     background-color: #1EE2E7 !important;
     color: #fff !important;
 }
+
+.card-header::after,
+.card-body::after,
+.card-footer::after {
+  display: block;
+  clear: both;
+  content: none;
+}

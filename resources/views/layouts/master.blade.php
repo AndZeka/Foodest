@@ -12,6 +12,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>Foodest</title>
 
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini" >
 <div class="wrapper" id="app">
@@ -180,7 +184,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <router-link to="/dashboard" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-tachometer-alt purple"></i>
               <p>
                 Dashboard
               </p>
@@ -188,7 +192,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-cog"></i>
+              <i class="nav-icon fa fa-cog teal"></i>
               <p>
                 Management
                 <i class="right fas fa-angle-left"></i>
@@ -196,34 +200,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
+                <router-link to="/users" class="nav-link">
+                  <i class="fas fa-users nav-icon yellow"></i>
+                  <p>Users</p>
+                </router-link>
               </li>
             </ul>
           </li>     
           <li class="nav-item">
             <router-link to="/profile" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-user orange"></i>
               <p>
                 Profile
               </p>
             </router-link>
           </li> 
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>
-                Logout
-              </p>
-            </a>
+            <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                <i class="nav-icon fas fa-sign-out-alt red"></i>
+                <p>
+                  {{ __('Log Out') }}
+                </p>
+              </a>
+          </form>
           </li>    
         </ul>
       </nav>
@@ -238,6 +239,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content">
       <div class="container-fluid">
         <router-view></router-view> 
+
+        <vue-progress-bar></vue-progress-bar>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -255,6 +258,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </footer>
 </div>
 <!-- ./wrapper -->
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>
