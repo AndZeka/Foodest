@@ -34,6 +34,7 @@
         "jquery": "^3.6.0",
         "moment": "^2.29.1",
         "popper.js": "^1.16.1",
+        "sweetalert2": "^11.0.16",
         "vform": "^2.0.4",
         "vue": "^2.6.12",
         "vue-progressbar": "^0.7.5",

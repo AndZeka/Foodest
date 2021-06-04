@@ -254,7 +254,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2021 <a href="#">Foodest</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2021 <a href="https://github.com/AndZeka/Foodest" target="blank">Foodest</a>.</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->

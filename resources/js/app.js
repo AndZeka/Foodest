@@ -7,6 +7,23 @@ window.Vue = Vue;
 import { HasError, AlertError } from 'vform/src/components/bootstrap5';
 import Form from 'vform';
 
+import swal from 'sweetalert2'
+window.swal = swal;
+
+const toast = swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', swal.stopTimer)
+    toast.addEventListener('mouseleave', swal.resumeTimer)
+  }
+})
+
+window.toast = toast;
+
 window.Form = Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
@@ -34,6 +51,9 @@ Vue.filter('upText', function(text){
 Vue.filter('myDate',function(created){
   return moment(created).format('MMMM Do YYYY, h:mm:ss A');
 });
+
+let Fire = new Vue();
+window.Fire = Fire;
 
 const router = new VueRouter({routes, mode: 'history'});
 
