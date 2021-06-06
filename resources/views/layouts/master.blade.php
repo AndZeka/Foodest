@@ -158,7 +158,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="./imgs/profile.png" class="img-circle elevation-2" alt="User Image">
+          <img src="imgs/profile/{{Auth::user()->photo}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -218,7 +218,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="nav-item">
             <form method="POST" action="{{ route('logout') }}">
               @csrf
-              <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+              <a class="nav-link logout" href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
                 <i class="nav-icon fas fa-sign-out-alt red"></i>
                 <p>
                   {{ __('Log Out') }}
