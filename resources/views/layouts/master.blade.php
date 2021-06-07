@@ -190,6 +190,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </router-link>
           </li>
+          @if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant'))
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog teal"></i>
@@ -206,7 +207,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </router-link>
               </li>
             </ul>
-          </li>     
+          </li> 
+          @endif    
           <li class="nav-item">
             <router-link to="/profile" class="nav-link">
               <i class="nav-icon fas fa-user orange"></i>
@@ -258,6 +260,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </footer>
 </div>
 <!-- ./wrapper -->
+@auth
+  <script>
+    window.user = @json(auth()->user())
+  </script>
+@endauth
+
 <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>

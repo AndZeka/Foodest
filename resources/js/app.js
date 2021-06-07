@@ -7,6 +7,9 @@ window.Vue = Vue;
 import { HasError, AlertError } from 'vform/src/components/bootstrap5';
 import Form from 'vform';
 
+import Gate from "./Gate";
+Vue.prototype.$gate = new Gate(window.user);
+
 import swal from 'sweetalert2'
 window.swal = swal;
 
@@ -41,7 +44,8 @@ Vue.use(VueProgressBar, {
 let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
     { path: '/profile', component: require('./components/Profile.vue').default },
-    { path: '/users', component: require('./components/Users.vue').default }
+    { path: '/users', component: require('./components/Users.vue').default },
+    { path: '*', component: require('./components/NotFound.vue').default }
 ]
 
 Vue.filter('upText', function(text){
@@ -51,6 +55,16 @@ Vue.filter('upText', function(text){
 Vue.filter('myDate',function(created){
   return moment(created).format('MMMM Do YYYY, h:mm:ss A');
 });
+
+Vue.component(
+  'not-found',
+  require('./components/NotFound.vue')
+);
+
+Vue.component(
+  'pagination',
+  require('laravel-vue-pagination')
+);
 
 let Fire = new Vue();
 window.Fire = Fire;
