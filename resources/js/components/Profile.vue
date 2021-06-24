@@ -251,8 +251,17 @@
 
     methods:{
       getProfilePhoto(){
-        let photo = (this.form.photo.length > 200) ? this.form.photo : "imgs/profile/"+this.form.photo ;
+        let photo = "imgs/profile/default.png";
+        if(this.form.photo){
+          if(this.form.photo.length > 200){
+            photo = this.form.photo;
+          }else{
+            photo = "imgs/profile/"+this.form.photo ;
+          }
+        }
         return photo;
+        // let photo = (this.form.photo.length > 200) ? this.form.photo : "imgs/profile/"+this.form.photo ;
+        // return photo;
       },
       updateInfo(){
         this.$Progress.start();

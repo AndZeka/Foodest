@@ -35,6 +35,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import VueProgressBar from 'vue-progressbar'
+import _ from 'lodash';
 Vue.use(VueProgressBar, {
   color: 'rgb(143, 255, 199)',
   failedColor: 'red',
@@ -74,5 +75,5 @@ const router = new VueRouter({routes, mode: 'history'});
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 const app = new Vue({
   el: '#app',
-  router
+  router,
 });

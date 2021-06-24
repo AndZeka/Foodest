@@ -11,13 +11,15 @@
               <div class="card-tools mr-3">
                 <div class="input-group input-group-sm" style="width: 150px">
                   <input
-                    type="text"
+                    type="search"
                     name="table_search"
+                    @keyup="searchit"
+                    v-model="search"
                     class="form-control float-right"
                     placeholder="Search"
                   />
                   <div class="input-group-append">
-                    <button type="submit" class="btn btn-default">
+                    <button @click="searchit" class="btn btn-default">
                       <i class="fas fa-search"></i>
                     </button>
                   </div>
@@ -153,8 +155,10 @@
                   />
                   <has-error :form="form" field="password"></has-error>
                 </div>
+                
               </div>
-
+              <input type="hidden">
+              <input type="hidden" v-model="form.photo" name="photo">
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" @click="hideModal">
                   Close
@@ -195,11 +199,15 @@ export default {
         password: "",
         type: "",
         bio: "",
-        photo: "",
+        photo: "default.png",
       }),
+      search:''
     };
   },
   methods: {
+    searchit:_.debounce(()=>{
+      Fire.$emit('searching')
+    },100),
     getResults(page = 1) {
         axios.get('api/user?page=' + page)
         .then(response => {
@@ -225,14 +233,14 @@ export default {
     },
     editModal(user) {
       this.editmode = true;
-      this.form.clear();
+      this.form.reset()
       $("#addNew").modal("show");
       this.form.fill(user);
     },
     newModal() {
       this.editmode = false;
       this.showModal();
-      this.form.clear();
+      this.form.reset()
       $("#addNew").modal("show");
     },
     deleteUser(id) {
@@ -295,6 +303,16 @@ export default {
     'not-found':NotFound
     },
   created() {
+    Fire.$on("searching", () => {
+      let query = this.search;
+      axios.get('api/findUser?q='+query)
+      .then((data)=>{
+        this.users=data.data
+      })
+      .catch(()=>{
+
+      })
+    });
     this.loadUsers();
     Fire.$on("AfterCreate", () => {
       this.loadUsers();

@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->mediumText('bio')->nullable();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
-            $table->text('photo')->nullable();
+            $table->text('photo')->default('default.png');
             $table->timestamps();
         });
     }
