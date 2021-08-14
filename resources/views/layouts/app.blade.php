@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        <script src="{{ asset('js/app.js') }}" defer></script>
+
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
@@ -24,50 +26,56 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
         <!--CSS-->
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
-        <link rel="stylesheet" type="text/css" href="css/style.css"/>
-        <link rel="stylesheet" type="text/css" href="css/font-awesome.css"/>
-        <link rel="stylesheet" type="text/css" href="css/animate.css">
-        <link rel="stylesheet" type="text/css" href="css/responsive.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/font-awesome.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/animate.css">
+        <link rel="stylesheet" type="text/css" href="/css/responsive.css"/>
 
         <!--JS-->
 
-        <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-        <script type="text/javascript" src="js/modernizr.js"></script>
-        <script src="js/scripts.js"></script>
-        <script src="js/waypoints.min.js"></script>
+        <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="/js/modernizr.js"></script>
+        <script src="/js/scripts.js"></script>
+        <script src="/js/waypoints.min.js"></script>
 
-        <script type="application/javascript" src="{{ mix('js/app.js') }}" defer></script>
+        {{--  Google Map  --}}
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Ri7hLGyfRD0pwimvavQrrGRWCI4Tf_Q&libraries=places,geometry"></script>
+
+
+        {{-- <script type="application/javascript" src="{{ mix('js/app.js') }}" defer></script> --}}
     </head>
     <body>
         <div id="app">
-            <header>
-                <div class="container">
-                  <div class="row clearfix" id="home">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                      <div class="logo">
-                        <h1> <a href="#"><img src="imgs/TMPS000136.png" alt="" /></a> </h1>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                      <div class="contact">
-                        <p>Questions? Call us Toll-free!<span class="number"><a href="#">1800-0000-7777</a></span><span class="time">(11AM to 11PM)</span></p>
-                      </div>
-                    </div>
-                  </div>
+          <div class="container">
+            <div class="row" id="home">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="logo">
+                  <h1><a href="#"><img class="w-25" src="/imgs/TMPS000136.png" alt="" /></a></h1>
                 </div>
-            </header>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="contact">
+                  <p>Questions? Call us Toll-free!<span class="number"><a href="#">1800-0000-7777</a></span><span
+                      class="time">(11AM to 11PM)</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
             <section class="saction1">
               <div class="container">
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="menu">
                       <div class="mobile-nav-container"> </div>
-                      <div class="mobile-nav-btn"><img class="nav-open" src=					      "https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-open.png" alt="Nav Button Open" /> <img class="nav-close" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-close.png" alt="Nav Button Close" /> </div>
+                      <div class="mobile-nav-btn"><img class="nav-open" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-open.png" alt="Nav Button Open" /> <img class="nav-close" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-close.png" alt="Nav Button Close" /> </div>
                       <nav>
                         <ul>
                           <li><a href="#home">Home</a></li>
-                          <li><a href="#resturant">Popular Restaurants </a></li>
+                          <li><a href="#resturant">Cart
+                            <badge-icon :cart-count="5"></badge-icon>  
+                          </a></li>
                           <li><a href="#offer">Order </a></li>
                           <li><a href="#contact">Contact</a></li>
                         </ul>
@@ -88,9 +96,6 @@
                                   @endauth
                               </div>
                           @endif
-                        {{-- <li><a href="#">Login</a></li>
-                        <li><a href="#">Register</a></li>
-                        <li><a href="#">Help</a></li> --}}
                       </ul>
                     </div>
                   </div>

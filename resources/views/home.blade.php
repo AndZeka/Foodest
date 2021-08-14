@@ -2,38 +2,48 @@
 
 @section('content')
     <section class="backgraound">
-      <div class="container" >
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="back">
-              <div class="line1 os-animation" data-os-animation="rotateInDownLeft" data-os-animation-delay="1s"> </div>
-              <div class="line2 os-animation" data-os-animation="rotateInDownLeft" data-os-animation-delay="1s"> </div>
-              <h2 class="os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.50s">Network of over 5000 Restaurants</h2>
-              <h3 class="os-animation" data-os-animation="zoomIn" data-os-animation-delay="1s">To Order Online</h3>
-              <div class="line3 os-animation" data-os-animation="rotateInDownRight" data-os-animation-delay="1s"> </div>
-              <div class="line4 os-animation" data-os-animation="rotateInDownRight" data-os-animation-delay="1s"> </div>
+      <form action="{{ route('search.restaurants') }}" method="post">
+        @csrf
+        <div class="container" >
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="back">
+                <div class="line1 os-animation" data-os-animation="rotateInDownLeft" data-os-animation-delay="1s"> </div>
+                <div class="line2 os-animation" data-os-animation="rotateInDownLeft" data-os-animation-delay="1s"> </div>
+                <h2 class="os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.50s">Network of over 5000 Restaurants</h2>
+                <h3 class="os-animation" data-os-animation="zoomIn" data-os-animation-delay="1s">To Order Online</h3>
+                <div class="line3 os-animation" data-os-animation="rotateInDownRight" data-os-animation-delay="1s"> </div>
+                <div class="line4 os-animation" data-os-animation="rotateInDownRight" data-os-animation-delay="1s"> </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
-          <div class="textbox os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.5s">
-            <h3>Location Name</h3>
-            <input type="text" placeholder="Secunderabad" />
+          <div class="row mt-5 d-flex justify-content-center align-items-center">
+            {{-- <div class="col-sm-4">
+              <search-text-field/>
+            </div>
+            <div class="col-sm-4">
+              <div class="textbox1 os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.5s">
+                <h3>Distance</h3>
+                <select name="distance" id="distance" class="form-control">
+                    <option value="1">1 Km</option>
+                    <option value="2">2 Km</option>
+                    <option value="3">3 Km</option>
+                    <option value="4">4 Km</option>
+                    <option value="5">5 Km</option>
+                </select>
+              </div>
+            </div> --}} 
+            <div class="col-sm-4">
+              <input class="form-control me-2" type="search" name="search" placeholder="Search Restaurant" aria-label="Search">
+            </div>
+            <div class="col-md-2 d-flex justify-content-center align-items-end">
+              <button class="search m-0 mb-1 btn btn-outline-none text-white pl-4 pr-4 p-1" type="submit">
+                  <i class="fa fa-search"></i>
+              </button>
+          </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
-          <div class="textbox os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.5s">
-            <h3>Restaurant Name</h3>
-            <input type="text" placeholder="Swagath Grand" />
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
-          <div class="textbox1 os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.5s">
-            <h3>Cuisine Name</h3>
-            <input type="text" placeholder="Chicken Biriyani" />
-            <span class="search"><a href="#"><i class="fa fa-search"></i></a></span> </div>
-        </div>
-      </div>
+      </form>
     </section>
     <section class="saction3">
       <div class="container">
@@ -76,146 +86,148 @@
               <div class="dotted4 os-animation" data-os-animation="bounceInRight" data-os-animation-delay="1s"></div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
-          <div class="slider clearfix os-animation" data-os-animation="fadeInDown
-      " data-os-animation-delay="0.20s">
-            <div class="img clearfix"> <img src="imgs/002.png" alt=""/> </div>
-            <div class="title clearfix">
-              <h3>Olister Combo<br/>
-                pack lorem</h3>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
-              <a href="#">GRAB IT &#10152;</a> </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="slider clearfix os-animation" data-os-animation="fadeInDown
+        " data-os-animation-delay="0.20s">
+              <div class="img clearfix"> <img src="imgs/002.png" alt=""/> </div>
+              <div class="title clearfix">
+                <h3>Olister Combo<br/>
+                  pack lorem</h3>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
+                <a href="#">GRAB IT &#10152;</a> </div>
+            </div>
           </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
-          <div class="slider clearfix os-animation" data-os-animation="fadeInDown
-      " data-os-animation-delay="0.50s">
-            <div class="img"> <img src="imgs/003.png" alt=""/> </div>
-            <div class="title">
-              <h3>Olister Combo<br/>
-                pack lorem</h3>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
-              <a href="#">GRAB IT &#10152;</a> </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="slider clearfix os-animation" data-os-animation="fadeInDown
+        " data-os-animation-delay="0.50s">
+              <div class="img"> <img src="imgs/003.png" alt=""/> </div>
+              <div class="title">
+                <h3>Olister Combo<br/>
+                  pack lorem</h3>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
+                <a href="#">GRAB IT &#10152;</a> </div>
+            </div>
           </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-4">
-          <div class="slider clearfix os-animation" data-os-animation="fadeInDown
-      " data-os-animation-delay="1s">
-            <div class="img"> <img src="imgs/oo1.png" alt=""/> </div>
-            <div class="title">
-              <h3>Olister Combo<br/>
-                pack lorem</h3>
-              <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
-              <a href="#">GRAB IT &#10152;</a> </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="slider clearfix os-animation" data-os-animation="fadeInDown
+        " data-os-animation-delay="1s">
+              <div class="img"> <img src="imgs/oo1.png" alt=""/> </div>
+              <div class="title">
+                <h3>Olister Combo<br/>
+                  pack lorem</h3>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
+                <a href="#">GRAB IT &#10152;</a> </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
     <section class="saction5">
       <div class="container" id="resturant">
-        <div class="col-lg-4 col-md-4 col-sm-4">
-          <div class="restaurants">
-            <h3 class="os-animation" data-os-animation="rollIn" data-os-animation-delay="1s">Top Restaurant </h3>
-          </div>
-          <div class="dotted6 os-animation" data-os-animation="bounceInRight" data-os-animation-delay="0.50s"></div>
           <div class="row">
-            <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
-              <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1s"> <a href="#"><img src="imgs/pizzhut.png" alt=""/> </a> </figure>
-            </div>
-            <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
-              <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1.2s"> <a href="#"> <img src="imgs/SUB.png" alt="" /></a></figure>
-            </div>
+              <div class="col-lg-4 col-md-4 col-sm-4">
+                  <div class="restaurants">
+                      <h3 class="os-animation" data-os-animation="rollIn" data-os-animation-delay="1s">Top Restaurant </h3>
+                  </div>
+                  <div class="dotted6 os-animation" data-os-animation="bounceInRight" data-os-animation-delay="0.50s"></div>
+                  <div class="row">
+                      <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
+                          <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1s"> <a href="#"><img src="imgs/pizzhut.png" alt=""/> </a> </figure>
+                      </div>
+                      <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
+                          <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1.2s"> <a href="#"> <img src="imgs/SUB.png" alt="" /></a></figure>
+                      </div>
+                  </div>
+                  <!--row-->
+
+                  <div class="row">
+                      <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6" >
+                          <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1.4s"> <a href="#"> <img src="imgs/KFC.png" alt=""/></a> </figure>
+                      </div>
+                      <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
+                          <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1.6s"> <a href="#"><img src="imgs/papjohns.png" alt="" /></a> </figure>
+                      </div>
+                  </div>
+                  <!--row-->
+
+                  <div class="row">
+                      <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
+                          <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1.8s"> <a href="#"><img src="imgs/dominos.png" alt="" /></a> </figure>
+                      </div>
+                      <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
+                          <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="2s"> <a href="#"><img src="imgs/barista.png" alt="" /></a> </figure>
+                      </div>
+                  </div>
+                  <!--row-->
+
+              </div>
+              <!---col-->
+
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                  <div class="food">
+                      <h3 class="os-animation" data-os-animation="rollIn" data-os-animation-delay="2.5s">Top Cuisines</h3>
+                  </div>
+                  <div class="dotted7 os-animation" data-os-animation="bounceInRight" data-os-animation-delay="2.8s"></div>
+                  <div class="food1">
+                      <div class="row">
+                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                              <figure class="food os-animation" data-os-animation="fadeInDown
+        " data-os-animation-delay="3s"> <img src="imgs/pizz.png" alt=""/>
+                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
+                              </figure>
+                          </div>
+                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                              <figure class="food os-animation" data-os-animation="fadeInDown
+          " data-os-animation-delay="3.2s"> <img src="imgs/burgar.png" alt="" />
+                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
+                              </figure>
+                          </div>
+                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                              <figure class="food os-animation" data-os-animation="fadeInDown
+          " data-os-animation-delay="3.4s"> <img src="imgs/donelt.png" alt="" />
+                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
+                              </figure>
+                          </div>
+                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                              <figure class="food os-animation" data-os-animation="fadeInDown
+            " data-os-animation-delay="3.6s"> <img src="imgs/sup.png" alt="" />
+                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
+                              </figure>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="food1">
+                      <div class="row">
+                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                              <figure class="food os-animation" data-os-animation="fadeInDown
+            " data-os-animation-delay="3.8s"> <img src="imgs/checken.png" alt=""/>
+                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
+                              </figure>
+                          </div>
+                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                              <figure class="food os-animation" data-os-animation="fadeInDown
+            " data-os-animation-delay="4s"> <img src="imgs/passta.png" alt=""/>
+                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
+                              </figure>
+                          </div>
+                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                              <figure class="food os-animation" data-os-animation="fadeInDown
+            " data-os-animation-delay="4.2s"> <img src="imgs/bhel.png" alt=""/>
+                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
+                              </figure>
+                          </div>
+                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                              <figure class="food os-animation" data-os-animation="fadeInDown
+              " data-os-animation-delay="4.4s"> <img src="imgs/past.png" alt=""/>
+                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
+                              </figure>
+                          </div>
+                      </div>
+                  </div>
+              </div>
           </div>
-          <!--row-->
-          
-          <div class="row">
-            <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6" >
-              <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1.4s"> <a href="#"> <img src="imgs/KFC.png" alt=""/></a> </figure>
-            </div>
-            <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
-              <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1.6s"> <a href="#"><img src="imgs/papjohns.png" alt="" /></a> </figure>
-            </div>
-          </div>
-          <!--row-->
-          
-          <div class="row">
-            <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
-              <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1.8s"> <a href="#"><img src="imgs/dominos.png" alt="" /></a> </figure>
-            </div>
-            <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
-              <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="2s"> <a href="#"><img src="imgs/barista.png" alt="" /></a> </figure>
-            </div>
-          </div>
-          <!--row--> 
-          
-        </div>
-        <!---col-->
-        
-        <div class="col-lg-8 col-md-8 col-sm-8">
-          <div class="food">
-            <h3 class="os-animation" data-os-animation="rollIn" data-os-animation-delay="2.5s">Top Cuisines</h3>
-          </div>
-          <div class="dotted7 os-animation" data-os-animation="bounceInRight" data-os-animation-delay="2.8s"></div>
-          <div class="food1">
-            <div class="row">
-              <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                <figure class="food os-animation" data-os-animation="fadeInDown
-      " data-os-animation-delay="3s"> <img src="imgs/pizz.png" alt=""/>
-                  <div class="order"> <a href="#">Cuisine Name</a> </div>
-                </figure>
-              </div>
-              <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                <figure class="food os-animation" data-os-animation="fadeInDown
-      " data-os-animation-delay="3.2s"> <img src="imgs/burgar.png" alt="" />
-                  <div class="order"> <a href="#">Cuisine Name</a> </div>
-                </figure>
-              </div>
-              <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                <figure class="food os-animation" data-os-animation="fadeInDown
-      " data-os-animation-delay="3.4s"> <img src="imgs/donelt.png" alt="" />
-                  <div class="order"> <a href="#">Cuisine Name</a> </div>
-                </figure>
-              </div>
-              <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                <figure class="food os-animation" data-os-animation="fadeInDown
-      " data-os-animation-delay="3.6s"> <img src="imgs/sup.png" alt="" />
-                  <div class="order"> <a href="#">Cuisine Name</a> </div>
-                </figure>
-              </div>
-            </div>
-          </div>
-          <div class="food1">
-            <div class="row">
-              <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                <figure class="food os-animation" data-os-animation="fadeInDown
-      " data-os-animation-delay="3.8s"> <img src="imgs/checken.png" alt=""/>
-                  <div class="order"> <a href="#">Cuisine Name</a> </div>
-                </figure>
-              </div>
-              <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                <figure class="food os-animation" data-os-animation="fadeInDown
-      " data-os-animation-delay="4s"> <img src="imgs/passta.png" alt=""/>
-                  <div class="order"> <a href="#">Cuisine Name</a> </div>
-                </figure>
-              </div>
-              <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                <figure class="food os-animation" data-os-animation="fadeInDown
-      " data-os-animation-delay="4.2s"> <img src="imgs/bhel.png" alt=""/>
-                  <div class="order"> <a href="#">Cuisine Name</a> </div>
-                </figure>
-              </div>
-              <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                <figure class="food os-animation" data-os-animation="fadeInDown
-      " data-os-animation-delay="4.4s"> <img src="imgs/past.png" alt=""/>
-                  <div class="order"> <a href="#">Cuisine Name</a> </div>
-                </figure>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-    </section>
+  </section>
     <section class="saction6">
       <div class="container">
         <div class="row bg os-animation" data-os-animation="flash" data-os-animation-delay="1s">

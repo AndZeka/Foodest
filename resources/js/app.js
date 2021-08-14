@@ -13,6 +13,7 @@ Vue.prototype.$gate = new Gate(window.user);
 import swal from 'sweetalert2'
 window.swal = swal;
 
+
 const toast = swal.mixin({
   toast: true,
   position: 'top-end',
@@ -67,6 +68,10 @@ Vue.component(
   require('laravel-vue-pagination')
 );
 
+Vue.component('search-text-field', require('./components/SearchTextField.vue').default);
+Vue.component('badge-icon', require('./components/BadgeIcon.vue').default);
+Vue.component('add-to-cart-button', require('./components/AddToCartButton.vue').default);
+
 let Fire = new Vue();
 window.Fire = Fire;
 
@@ -75,5 +80,5 @@ const router = new VueRouter({routes, mode: 'history'});
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 const app = new Vue({
   el: '#app',
-  router,
+  router
 });

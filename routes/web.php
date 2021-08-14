@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +23,8 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::post('restaurants', [RestaurantController::class, 'index'])->name('search.restaurants');
+Route::get('restaurant/{slug}', [ProductController::class, 'index'])->name('restaurant.products');
 
 Route::get('/{any}', [HomeController::class,'index'])->where('any', '.*');
