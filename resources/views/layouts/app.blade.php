@@ -74,7 +74,7 @@
                         <ul>
                           <li><a href="#home">Home</a></li>
                           <li><a href="#resturant">Cart
-                            <badge-icon :cart-count="5"></badge-icon>  
+                            <badge-icon :basket-count="5"></badge-icon>  
                           </a></li>
                           <li><a href="#offer">Order </a></li>
                           <li><a href="#contact">Contact</a></li>

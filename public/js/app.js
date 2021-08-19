@@ -6957,7 +6957,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    cartCount: {
+    basketCount: {
       required: true
     }
   },
@@ -71197,7 +71197,7 @@ var render = function() {
   return _c(
     "span",
     { staticClass: "badge badge-pill badge-warning align-top" },
-    [_vm._v(_vm._s(_vm.cartCount))]
+    [_vm._v(_vm._s(_vm.basketCount))]
   )
 }
 var staticRenderFns = []
