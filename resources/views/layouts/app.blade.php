@@ -73,7 +73,7 @@
                       <nav>
                         <ul>
                           <li><a href="#home">Home</a></li>
-                          <li><a href="#resturant">Cart
+                          <li><a href="#resturant">Cart2
                             <badge-icon :basket-count="5"></badge-icon>  
                           </a></li>
                           <li><a href="#offer">Order </a></li>
