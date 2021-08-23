@@ -143,4 +143,46 @@ class UserController extends Controller
         }
         return $users;
     }
+
+    public function getSetupIntent()
+    {
+        return auth()->user()->createSetupIntent();
+    }
+
+    public function getPaymentMethods()
+    {
+        $user = auth()->user();
+        $paymentMethods = [];
+
+        if ($user->hasPaymentMethod()) {
+            foreach ($user->paymentMethods() as $method) {
+                array_push($paymentMethods, [
+                    'id' => $method->id,
+                    'brand' => $method->card->brand,
+                    'last_four' => $method->card->last4,
+                    'exp_month' => $method->card->exp_month,
+                    'exp_year' => $method->card->exp_year,
+                ]);
+            }
+        }
+
+        return response()->json([
+            "methods" => $paymentMethods,
+            "default_payment_method" => $user->defaultPaymentMethod()
+        ]);
+    }
+
+    public function postPaymentMethod(Request $request) {
+        $user = auth()->user();
+        $paymentMethodID = $request->get("payment_method_id");
+
+        if($user->stripe_id == null) {
+            $user->createAsStripeCustomer();
+        }
+
+        $user->addPaymentMethod($paymentMethodID);
+        $user->updateDefaultPaymentMethod($paymentMethodID);
+
+        return response()->json('', 200);
+    }
 }

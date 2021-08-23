@@ -24,3 +24,11 @@ Route::apiResources(['user'=>UserController::class]);
 Route::get('profile',[UserController::class,'profile']);
 Route::put('profile',[UserController::class,'updateProfile']);
 Route::get('findUser',[UserController::class,'search']);
+
+//Checkout
+Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
+    Route::get('/user/setup-intent', [UserController::class, 'getSetupIntent']);
+    Route::get('/user/payment-methods', [UserController::class, 'getPaymentMethods'])->name('user.paymentMethods');
+});
+
+//Stripe

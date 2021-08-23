@@ -10,6 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Passport\HasApiTokens;
 use App\Models\Basket;
+use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
@@ -18,6 +19,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -65,5 +67,12 @@ class User extends Authenticatable
 
     public function basket(){
         return $this->hasMany(Basket::class);
+    }
+
+    public function getBasketTotal()
+    {
+        return $this->basket->sum(function ($item) {
+            return $item->qty * $item->price;
+        });
     }
 }

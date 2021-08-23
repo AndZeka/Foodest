@@ -7473,6 +7473,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -7500,62 +7508,101 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-// let stripe = Stripe(process.env.MIX_STRIPE_KEY);
-// let elements = stripe.elements()
-// let style = {
-//     base: {
-//         border: '1px solid #D8D8D8',
-//         borderRadius: '4px',
-//         color: "#000",
-//     },
-//     invalid: {
-//     }
-// };
+var stripe = Stripe("pk_test_51JRdPkK8BYt0jpQNWHEH0Rktf1MvrQkTReWTfuqgQT8SpPxkQUZ41OopzLyf7xhQ7JXIkqBLn1FTOrDkvMfZlRY800ym6aFjn1");
+var elements = stripe.elements();
+var style = {
+  base: {
+    border: '1px solid #D8D8D8',
+    borderRadius: '4px',
+    color: "#000"
+  },
+  invalid: {}
+};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {// fullName: 'dsadasds',
-      // card: '',
-      // paymentMethodID: '',
-      // paymentMethods: [],
+    return {
+      fullName: 'dsadasds',
+      card: '',
+      paymentMethodID: '',
+      paymentMethods: []
     };
   },
-  mounted: function mounted() {// this.loadIntent()
-    // this.card = elements.create('card', style)
-    // this.card.mount(this.$refs.card)
-    // this.loadPaymentMethods()
+  mounted: function mounted() {
+    this.loadIntent();
+    this.card = elements.create('card', style);
+    this.card.mount(this.$refs.card);
+    this.loadPaymentMethods();
   },
-  methods: {// async loadIntent() {
-    //     let response = await axios.get('/user/setup-intent')
-    //     this.intentToken = response.data
-    // },
-    // submitPaymentMethod() {
-    //     stripe.confirmCardSetup(
-    //         this.intentToken.client_secret, {
-    //             payment_method: {
-    //                 card: this.card,
-    //                 billing_details: {
-    //                     name: this.fullName
-    //                 }
-    //             }
-    //         }
-    //     ).then(function(result) {
-    //         if(result.error) {
-    //             console.log(result.error)
-    //         } else {
-    //             this.paymentMethodID = result.setupIntent.payment_method
-    //             this.card.clear()
-    //         }
-    //     }.bind(this));
-    // },
-    // async loadPaymentMethods() {
-    //     let response = await axios.get('/user/payment-methods');
-    //     this.paymentMethods = response.data.methods
-    //     console.log(this.paymentMethods)
-    // },
-    // selectPaymentMethod(selectPaymentMethod) {
-    //     this.paymentMethodID = selectPaymentMethod
-    // }
+  methods: {
+    loadIntent: function loadIntent() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('/api/v1/user/setup-intent');
+
+              case 2:
+                response = _context.sent;
+                _this.intentToken = response.data;
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    submitPaymentMethod: function submitPaymentMethod() {
+      stripe.confirmCardSetup(this.intentToken.client_secret, {
+        payment_method: {
+          card: this.card,
+          billing_details: {
+            name: this.fullName
+          }
+        }
+      }).then(function (result) {
+        if (result.error) {
+          console.log(result.error);
+        } else {
+          this.paymentMethodID = result.setupIntent.payment_method;
+          this.card.clear();
+        }
+      }.bind(this));
+    },
+    loadPaymentMethods: function loadPaymentMethods() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get('/api/v1/user/payment-methods');
+
+              case 2:
+                response = _context2.sent;
+                _this2.paymentMethods = response.data.methods;
+                console.log(_this2.paymentMethods);
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    selectPaymentMethod: function selectPaymentMethod(_selectPaymentMethod) {
+      this.paymentMethodID = _selectPaymentMethod;
+    }
   }
 });
 
@@ -73482,9 +73529,106 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [_vm._v("\n    Stripe form\n")])
+  return _c("div", { staticClass: "row" }, [
+    _c(
+      "div",
+      { staticClass: "col-md-12 mb-2" },
+      _vm._l(_vm.paymentMethods, function(paymentMethod) {
+        return _c("div", { key: paymentMethod.id }, [
+          _c(
+            "div",
+            {
+              staticClass: "row",
+              class: {
+                "bg-success text-light": paymentMethod.id == _vm.paymentMethodID
+              },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.selectPaymentMethod(paymentMethod.id)
+                }
+              }
+            },
+            [
+              _vm._m(0, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-10 mt-3" }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(paymentMethod.brand.charAt(0).toUpperCase()) +
+                    _vm._s(paymentMethod.brand.slice(1)) +
+                    "\n                    Ending In: " +
+                    _vm._s(paymentMethod.last_four) +
+                    " Exp: " +
+                    _vm._s(paymentMethod.exp_month) +
+                    " " +
+                    _vm._s(paymentMethod.exp_year) +
+                    "\n                "
+                )
+              ])
+            ]
+          )
+        ])
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.paymentMethodID,
+          expression: "paymentMethodID"
+        }
+      ],
+      attrs: { type: "hidden", name: "paymentMethodID", id: "paymentMethodID" },
+      domProps: { value: _vm.paymentMethodID },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.paymentMethodID = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-9" }, [
+      _c("div", {
+        ref: "card",
+        staticClass: "form-control",
+        staticStyle: { height: "2.4rem", "padding-top": ".7em" }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-3" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.submitPaymentMethod($event)
+            }
+          }
+        },
+        [_vm._v("Save")]
+      )
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-2" }, [
+      _c("img", { attrs: { src: "/imgs/visa.png", alt: "", width: "100%" } })
+    ])
+  }
+]
 render._withStripped = true
 
 

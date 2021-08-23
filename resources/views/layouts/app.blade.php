@@ -75,9 +75,16 @@
                       <nav>
                         <ul>
                           <li><a href="#home">Home</a></li>
-                          <li><a href="{{ route("basket.index") }}">Cart
-                            <badge-icon :basket-count="{{ Auth::user()->basket()->sum('qty') ?? '' }}"></badge-icon>  
-                          </a></li>
+                          <li>
+                            <a href="{{ route("basket.index") }}">Cart
+                              @if(Auth::guest())
+                                  <badge-icon :basket-count="''"/>
+                              @else
+                                  <badge-icon :basket-count="{{ auth::user()->basket->sum('qty') ?? '' }}"/>
+                                  <badge-icon :basket-count="{{ auth::user()->basket->sum('qty') ?? '' }}"/>
+                              @endif
+                            </a>
+                          </li>
                           <li><a href="#offer">Order </a></li>
                           <li><a href="#contact">Contact</a></li>
                         </ul>

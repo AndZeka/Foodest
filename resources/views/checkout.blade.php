@@ -10,21 +10,18 @@
                         <span class="badge badge-secondary badge-pill">{{ Auth::user()->basket->count('qty') }}</span>
                     </h4>
                     <ul class="list-group mb-3">
-                        {{-- @foreach($basket as $item) --}}
+                        @foreach($basket as $item)
                         <li class="list-group-item d-flex justify-content-between lh-condensed">
                             <div>
                                 <h6 class="my-0">Product name</h6>
-                                {{-- {{ $item->product->name }} --}}
-                                <small class="text-muted"></small>
+                                <small class="text-muted">{{ $item->product->name }}</small>
                             </div>
-                            {{-- {{ number_format($item->qty * $item->price, 2) }} --}}
-                            <span class="text-muted">£</span>
+                            <span class="text-muted">£{{ number_format($item->qty * $item->price, 2) }}</span>
                         </li>
-                        {{-- @endforeach --}}
+                        @endforeach
                         <li class="list-group-item d-flex justify-content-between">
                             <span>Total (USD)</span>
-                            {{-- {{ Auth::user()->getBasketTotal() }} --}}
-                            <strong>£</strong>
+                            <strong>£{{ Auth::user()->getBasketTotal() }}</strong>
                         </li>
                     </ul>
 
@@ -39,8 +36,7 @@
                 </div>
                 <div class="col-md-8 order-md-1">
                     <h4 class="mb-3">Billing address</h4>
-                    {{-- {{ route('checkout.store') }} --}}
-                    <form class="needs-validation" novalidate action="#" method="post">
+                    <form class="needs-validation" novalidate action="{{ route('checkout.store') }}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">

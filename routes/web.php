@@ -6,6 +6,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\API\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,11 @@ Route::group(['middleware' => ['web']], function() {
 
     //Checkout
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    // Route::get('/user/setup-intent', [UserController::class, 'getSetupIntent']);
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
+    
+    
 });
 
 Route::get('/{any}', [HomeController::class,'index'])->where('any', '.*');
