@@ -1,5 +1,5 @@
 <template>
-    <span class="badge badge-pill badge-warning align-top">{{ basketCount }}</span>
+    <span :class="{ 'badge badge-pill badge-warning align-top': basketCount !== 0}">{{ basketCount === 0 ? '' : basketCount}}</span>
 </template>
 
 <script>
@@ -10,7 +10,9 @@
             }
         },
         mounted(){
-
+            this.$root.$on('changeBasketCount',(newBasketCount)=>{
+                this.basketCount = newBasketCount
+            })
         }
     }
 </script>

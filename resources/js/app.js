@@ -71,6 +71,7 @@ Vue.component(
 Vue.component('search-text-field', require('./components/SearchTextField.vue').default);
 Vue.component('badge-icon', require('./components/BadgeIcon.vue').default);
 Vue.component('add-to-cart-button', require('./components/AddToCartButton.vue').default);
+Vue.component('stripe-payment-form', require('./components/StripePaymentForm.vue').default);
 
 let Fire = new Vue();
 window.Fire = Fire;

@@ -13,14 +13,15 @@
           </div>
           @foreach ($products as $product)
             <div class="col-lg-4 col-md-4 col-sm-4">
-                <div class="slider clearfix os-animation" data-os-animation="fadeInDown
-                " data-os-animation-delay="0.20s">
-                <div class="img clearfix"> <img src="/imgs/{{ $product->photo }}" alt=""/> </div>
+              <div class="slider clearfix os-animation" data-os-animation="fadeInDown
+                            " data-os-animation-delay="0.20s">
+                <div class="img clearfix"> <img src="/imgs/{{ $product->photo }}" alt="" style="width: 100%"/> </div>
                 <div class="title clearfix">
-                    <h3>{{ $product->name }}<br/></h3>
-                    <p>{{ $product->description }}</p>
-                    <add-to-cart-button/>
+                  <h3>{{ $product->name }}<br /></h3>
+                  <p>{{ $product->description }}</p>
+                  <add-to-cart-button :product="{{ $product }}" />
                 </div>
+              </div>
             </div>
           @endforeach
         </div>

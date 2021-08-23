@@ -43,7 +43,9 @@
         {{--  Google Map  --}}
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Ri7hLGyfRD0pwimvavQrrGRWCI4Tf_Q&libraries=places,geometry"></script>
 
-
+        {{--  Stripe  --}}
+        <script src="https://js.stripe.com/v3/"></script>
+        
         {{-- <script type="application/javascript" src="{{ mix('js/app.js') }}" defer></script> --}}
     </head>
     <body>
@@ -73,8 +75,8 @@
                       <nav>
                         <ul>
                           <li><a href="#home">Home</a></li>
-                          <li><a href="#resturant">Cart2
-                            <badge-icon :basket-count="5"></badge-icon>  
+                          <li><a href="{{ route("basket.index") }}">Cart
+                            <badge-icon :basket-count="{{ Auth::user()->basket()->sum('qty') ?? '' }}"></badge-icon>  
                           </a></li>
                           <li><a href="#offer">Order </a></li>
                           <li><a href="#contact">Contact</a></li>
