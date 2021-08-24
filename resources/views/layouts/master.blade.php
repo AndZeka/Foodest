@@ -162,13 +162,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <router-link to="/dashboard" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt purple"></i>
+            <router-link to="/profile" class="nav-link">
+              <i class="nav-icon fas fa-user orange"></i>
               <p>
-                Dashboard
+                Profile
               </p>
             </router-link>
-          </li>
+          </li> 
           @if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant'))
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -181,21 +181,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <router-link to="/users" class="nav-link">
-                  <i class="fas fa-users nav-icon yellow"></i>
+                  <i class="fas fa-users nav-icon blue"></i>
                   <p>Users</p>
+                </router-link>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to="/orders" class="nav-link">
+                  <i class="fas fa-shopping-basket nav-icon blue"></i>
+                  <p>My Orders</p>
+                </router-link>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to="/track-order-map" class="nav-link">
+                  <i class="fas fa-shipping-fast nav-icon blue"></i>
+                  <p>Track Order</p>
                 </router-link>
               </li>
             </ul>
           </li> 
           @endif    
-          <li class="nav-item">
-            <router-link to="/profile" class="nav-link">
-              <i class="nav-icon fas fa-user orange"></i>
-              <p>
-                Profile
-              </p>
-            </router-link>
-          </li> 
           <li class="nav-item">
             <form method="POST" action="{{ route('logout') }}">
               @csrf

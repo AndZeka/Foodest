@@ -47,8 +47,19 @@ let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
     { path: '/profile', component: require('./components/Profile.vue').default },
     { path: '/users', component: require('./components/Users.vue').default },
+    { path: '/track-order-map', component: require('./components/TrackOrderMap.vue').default },
     { path: '*', component: require('./components/NotFound.vue').default }
 ]
+
+import * as VueGoogleMaps from 'vue2-google-maps'
+
+//Google Maps
+Vue.use(VueGoogleMaps, {
+  load: { libraries: 'geometry', key: 'AIzaSyA7Ri7hLGyfRD0pwimvavQrrGRWCI4Tf_Q' }
+})
+
+import MapsUtils from './utils/maps-utils.js'
+Vue.use(MapsUtils)
 
 Vue.filter('upText', function(text){
   return text.charAt(0).toUpperCase() + text.slice(1);

@@ -41,7 +41,8 @@
         <script src="/js/waypoints.min.js"></script>
 
         {{--  Google Map  --}}
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Ri7hLGyfRD0pwimvavQrrGRWCI4Tf_Q&libraries=places,geometry"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&key=AIzaSyA7Ri7hLGyfRD0pwimvavQrrGRWCI4Tf_Q"></script>
+        
 
         {{--  Stripe  --}}
         <script src="https://js.stripe.com/v3/"></script>
