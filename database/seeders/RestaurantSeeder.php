@@ -17,6 +17,7 @@ class RestaurantSeeder extends Seeder
         Restaurant::create(
             [
                 'name'=>'Aba',
+                'user_id'=>1,
                 'slug'=>'aba',
                 'lat'=>53.4620,
                 'lng'=>-2.2493,
@@ -29,6 +30,7 @@ class RestaurantSeeder extends Seeder
         Restaurant::create(
             [
                 'name'=>'Skenda',
+                'user_id'=>2,
                 'slug'=>'skenda',
                 'lat'=>53.4620,
                 'lng'=>2.2493,

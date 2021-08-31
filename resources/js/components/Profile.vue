@@ -300,7 +300,6 @@
     },
 
     mounted() {
-      console.log("Example component mounted");
     },
 
     created(){

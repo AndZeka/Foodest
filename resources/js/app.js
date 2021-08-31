@@ -47,7 +47,9 @@ let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
     { path: '/profile', component: require('./components/Profile.vue').default },
     { path: '/users', component: require('./components/Users.vue').default },
+    { path: '/my-restaurants', component: require('./components/MyRestaurants.vue').default },
     { path: '/track-order-map', component: require('./components/TrackOrderMap.vue').default },
+    { path: '/my-orders', component: require('./components/MyOrders.vue').default },
     { path: '*', component: require('./components/NotFound.vue').default }
 ]
 
@@ -55,7 +57,7 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 
 //Google Maps
 Vue.use(VueGoogleMaps, {
-  load: { libraries: 'geometry', key: 'AIzaSyA7Ri7hLGyfRD0pwimvavQrrGRWCI4Tf_Q' }
+  load: { libraries: 'geometry', key: 'AIzaSyB7qGSRtd_du7Yd2YCtrYMhd7o1Xrv0H6Y' }
 })
 
 import MapsUtils from './utils/maps-utils.js'

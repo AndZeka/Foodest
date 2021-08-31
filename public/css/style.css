@@ -685,4 +685,12 @@ if it's not present, don't show loader */
 	}
 
 .freetemplates A { color:#FFF;}	
+
+.active {
+	color: #69c15f !important;
+}
+
+.active span{
+	border-bottom: 1px solid #69c15f;
+}
 	

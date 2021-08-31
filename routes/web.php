@@ -28,10 +28,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::post('restaurants', [RestaurantController::class, 'index'])->name('search.restaurants');
-Route::get('restaurant/{slug}', [ProductController::class, 'index'])->name('restaurant.products');
 
 
-Route::group(['middleware' => ['web']], function() {
+Route::group(['middleware' => ['web','auth']], function() {
+    
+    Route::get('restaurant/{slug}', [ProductController::class, 'index'])->name('restaurant.products');
     //Basket
     Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
     Route::post('/basket', [BasketController::class, 'store'])->name('basket.store');
@@ -41,8 +42,7 @@ Route::group(['middleware' => ['web']], function() {
     // Route::get('/user/setup-intent', [UserController::class, 'getSetupIntent']);
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
-    
+    Route::DELETE('/basket/{basket}', [BasketController::class, 'destroy'])->name('basket.destroy');
     
 });
-
 Route::get('/{any}', [HomeController::class,'index'])->where('any', '.*');

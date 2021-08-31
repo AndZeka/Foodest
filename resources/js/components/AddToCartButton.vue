@@ -11,17 +11,27 @@ export default {
     },
     data(){
         return{
-
+            count:''
         }
     },
     mounted(){
-        console.log(this.product);
     },
     methods:{
         async addToCart(){
-            let response = await axios.post('/basket', {product_id: this.product.id})
-            this.$root.$emit('changeBasketCount', response.data.basket_count)
-            console.log(response.data)
+            var vm = this;
+            this.$Progress.start();
+            await axios.post('/basket', {product_id: this.product.id})
+            .then(function(response) {
+                toast.fire({
+                    icon: "success",
+                    title: "Food added to cart!",
+                });
+                vm.count = response.data.basket_count;
+                this.$Progress.finish();      
+            }).catch(() => {
+                this.$Progress.fail();
+            });
+            this.$root.$emit('changeBasketCount', this.count);
         }
     }
 }

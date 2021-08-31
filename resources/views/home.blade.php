@@ -231,24 +231,24 @@
     <section class="saction6">
       <div class="container">
         <div class="row bg os-animation" data-os-animation="flash" data-os-animation-delay="1s">
-          <div class="col-lg-3 col-md-3 col-sm-3">
+          <div class="col-lg-3 col-md-3 col-sm-3 pt-5 pl-5">
             <div class="imgs">
-              <h3 class="os-animation">Enjoy Exclusive Food <br />
+              <h3 class="os-animation text-white">Enjoy Exclusive Food <br />
                 Order any of these</h3>
             </div>
           </div>
-          <div class="col-lg-2 col-md-2 col-sm-2">
+          <div class="col-lg-2 col-md-2 col-sm-2 pt-3">
             <div class="point">
               <p><span>&#10152;</span><a href="#"> Party Order</a></p>
               <p><span>&#10152;</span><a href="#">Home Made Food</a></p>
               <p><span>&#10152;</span><a href="#">Diet Food</a></p>
             </div>
           </div>
-          <div class="col-lg-5 col-md-5 col-sm-5">
+          <div class="col-lg-5 col-md-5 col-sm-5 pt-3">
             <figure class="imgs"> <img src="imgs/abc.png" alt="" /> </figure>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2">
-            <div class="button"> <a href="#">Order Now</a> </div>
+            <div class="button text-center"> <a href="#">Order Now</a> </div>
           </div>
         </div>
       </div>

@@ -20,7 +20,7 @@
             <div ref="card" class="form-control" style="height: 2.4rem; padding-top: .7em"></div>
         </div>
         <div class="col-md-3">
-            <button class="btn btn-success" @click.prevent="submitPaymentMethod">Save</button>
+            <button class="btn btn-success" @click.prevent="submitPaymentMethod">Save Card Info</button>
         </div>
     </div>
 </template>
@@ -85,7 +85,6 @@ export default {
         async loadPaymentMethods() {
             let response = await axios.get('/api/v1/user/payment-methods');
             this.paymentMethods = response.data.methods
-            console.log(this.paymentMethods)
         },
 
         selectPaymentMethod(selectPaymentMethod) {

@@ -43,6 +43,7 @@ class CheckoutController extends Controller
                     'qty' => $basket->qty,
                     'price' => $basket->price,
                 ]);
+                $basket->delete();
             }
 
             return view('order-confirmation', [

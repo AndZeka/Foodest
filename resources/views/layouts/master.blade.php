@@ -17,6 +17,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Ri7hLGyfRD0pwimvavQrrGRWCI4Tf_Q&libraries=places,geometry"></script>
 </head>
 <body class="hold-transition sidebar-mini" >
 <div class="wrapper" id="app">
@@ -162,6 +163,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
+            <router-link to="/dashboard" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt purple"></i>
+              <p>
+                Dashboard
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link to="/profile" class="nav-link">
               <i class="nav-icon fas fa-user orange"></i>
               <p>
@@ -169,7 +178,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </router-link>
           </li> 
-          @if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant'))
+          @if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant') || \Gate::allows('isUser'))
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-cog teal"></i>
@@ -178,6 +187,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            @if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant'))
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <router-link to="/users" class="nav-link">
@@ -186,9 +196,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </router-link>
               </li>
             </ul>
+            @endif
+            @if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant'))
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link to="/orders" class="nav-link">
+                <router-link to="/my-restaurants" class="nav-link">
+                  <i class="fas fa-utensils nav-icon blue"></i>
+                  <p>Restaurants</p>
+                </router-link>
+              </li>
+            </ul>
+            @endif
+            @if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant') || \Gate::allows('isUser'))
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to="/my-orders" class="nav-link">
                   <i class="fas fa-shopping-basket nav-icon blue"></i>
                   <p>My Orders</p>
                 </router-link>
@@ -202,6 +224,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </router-link>
               </li>
             </ul>
+            @endif
           </li> 
           @endif    
           <li class="nav-item">

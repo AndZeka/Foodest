@@ -47,4 +47,10 @@ class BasketController extends Controller
             200
         ]);
     }
+
+    public function destroy(Basket $basket) {
+        $basket->delete();
+
+        return redirect()->route('basket.index')->with('success', 'Basket deleted successfully');
+    }
 }

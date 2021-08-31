@@ -41,7 +41,7 @@
         <script src="/js/waypoints.min.js"></script>
 
         {{--  Google Map  --}}
-        <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&key=AIzaSyA7Ri7hLGyfRD0pwimvavQrrGRWCI4Tf_Q"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places&key=AIzaSyB7qGSRtd_du7Yd2YCtrYMhd7o1Xrv0H6Y"></script>
         
 
         {{--  Stripe  --}}
@@ -55,7 +55,7 @@
             <div class="row" id="home">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="logo">
-                  <h1><a href="#"><img class="w-25" src="/imgs/TMPS000136.png" alt="" /></a></h1>
+                  <h1><a href="{{ url('/') }}"><img class="w-25" src="/imgs/TMPS000136.png" alt="" /></a></h1>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -75,9 +75,9 @@
                       <div class="mobile-nav-btn"><img class="nav-open" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-open.png" alt="Nav Button Open" /> <img class="nav-close" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/6214/nav-close.png" alt="Nav Button Close" /> </div>
                       <nav>
                         <ul>
-                          <li><a href="#home">Home</a></li>
+                          <li><a href="{{ url('/') }}" class="{{ \Request::is('/') ? 'active' : '' }}"><span>Home</span></a></li>
                           <li>
-                            <a href="{{ route("basket.index") }}">Cart
+                            <a class="{{ \Request::is('basket') ? 'active' : '' }}" href="{{ route("basket.index") }}" ><span>Cart</span>
                               @if(Auth::guest())
                                   <badge-icon :basket-count="''"/>
                               @else
@@ -86,8 +86,8 @@
                               @endif
                             </a>
                           </li>
-                          <li><a href="#offer">Order </a></li>
-                          <li><a href="#contact">Contact</a></li>
+                          <li><a href="#offer" class="{{ \Request::is('checkout') ? 'active' : '' }}"><span>Order</span> </a></li>
+                          <li><a href="#contact" class="{{ \Request::is('contact') ? 'active' : '' }}"><span>Contact</span></a></li>
                         </ul>
                       </nav>
                     </div>
