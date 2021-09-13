@@ -26,7 +26,7 @@
                             <td class="col-sm-8 col-md-6">
                                 <div class="media">
                                     <a class="thumbnail pull-left" href="#"> <img class="media-object"
-                                            src="/imgs/{{ $basket->product->photo }}"
+                                            src="{{ $basket->product->photo }}"
                                             style="width: 72px; height: 72px;"> </a>
                                     <div class="media-body ml-1">
                                         <h4 class="media-heading"><a href="#">{{ $basket->product->name }}</a></h4>

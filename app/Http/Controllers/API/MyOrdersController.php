@@ -79,14 +79,16 @@ class MyOrdersController extends Controller
     }
 
     public function search(){
-        if($search = \Request::get('q')){
-            $myorders = OrderDetail::where(function($query) use ($search){
-                $query->where('id','LIKE',"%$search%")
-                ->orWhere('qty','LIKE',"%$search%");
-            })->latest()->paginate(20);
-        }else{
-            $myorders = OrderDetail::latest()->paginate(5);
+        if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant') || \Gate::allows('isUser')){
+            if($search = \Request::get('q')){
+                $myorders = OrderDetail::where(function($query) use ($search){
+                    $query->where('id','LIKE',"%$search%")
+                    ->orWhere('qty','LIKE',"%$search%");
+                })->latest()->paginate(20);
+            }else{
+                $myorders = OrderDetail::latest()->paginate(5);
+            }
+            return $myorders;
         }
-        return $myorders;
     }
 }

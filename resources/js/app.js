@@ -48,6 +48,7 @@ let routes = [
     { path: '/profile', component: require('./components/Profile.vue').default },
     { path: '/users', component: require('./components/Users.vue').default },
     { path: '/my-restaurants', component: require('./components/MyRestaurants.vue').default },
+    { path: '/my-products', component: require('./components/MyProducts.vue').default },
     { path: '/track-order-map', component: require('./components/TrackOrderMap.vue').default },
     { path: '/my-orders', component: require('./components/MyOrders.vue').default },
     { path: '*', component: require('./components/NotFound.vue').default }

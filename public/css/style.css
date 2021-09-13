@@ -180,11 +180,14 @@ header {
 	color: #69c15f;
 }
 .backgraound {
-	background: url(../imgs/backgraound.jpg) no-repeat;
+	background: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6)), url(../imgs/2.jpg) no-repeat;
 	background-size: cover;
 	display: block;
 	min-height: 425px;
 	position: relative;
+	background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .back h2 {
 	text-align: center;

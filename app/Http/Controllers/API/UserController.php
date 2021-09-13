@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant')){
+        if(\Gate::allows('isAdmin')){
             return User::latest()->paginate(5);
         }
     }
@@ -33,20 +33,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'name' => 'required|string|max:191',
-            'email' => 'required|string|email|max:191|unique:users',
-            'password' => 'required|string|min:8',
-        ]);
+        if(\Gate::allows('isAdmin')){
+            $this->validate($request,[
+                'name' => 'required|string|max:191',
+                'email' => 'required|string|email|max:191|unique:users',
+                'password' => 'required|string|min:8',
+            ]);
 
-        return User::create([
-            'name'=>$request['name'],
-            'email'=>$request['email'],
-            'type'=>$request['type'],          
-            'bio'=>$request['bio'],          
-            'photo'=>$request['photo'],
-            'password'=>Hash::make($request['password'])
-        ]);
+            return User::create([
+                'name'=>$request['name'],
+                'email'=>$request['email'],
+                'type'=>$request['type'],          
+                'bio'=>$request['bio'],          
+                'photo'=>$request['photo'],
+                'password'=>Hash::make($request['password'])
+            ]);
+        }
     }
 
     /**
@@ -61,38 +63,40 @@ class UserController extends Controller
     }
 
     public function updateProfile(Request $request){
-        $user = auth('api')->user();
+        if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant')){
+            $user = auth('api')->user();
 
-        $this->validate($request,[
-            'name' => 'required|string|max:191',
-            'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
-            'password' => 'sometimes|required|min:8',
-        ]);
+            $this->validate($request,[
+                'name' => 'required|string|max:191',
+                'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
+                'password' => 'sometimes|required|min:8',
+            ]);
 
 
-        $currentPhoto = $user->photo;
-        if($request->photo != $currentPhoto){
-            $name = time().'.'.explode('/',explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
-            //Image intervation model class
-            \Image::make($request->photo)->save(public_path('imgs/profile/').$name);
-            
-            $request->merge(['photo' => $name]);
+            $currentPhoto = $user->photo;
+            if($request->photo != $currentPhoto){
+                $name = time().'.'.explode('/',explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+                //Image intervation model class
+                \Image::make($request->photo)->save(public_path('imgs/profile/').$name);
+                
+                $request->merge(['photo' => $name]);
 
-            $userPhoto = public_path('imgs/profile/').$currentPhoto;
-            if(file_exists($userPhoto)){
-                @unlink($userPhoto);
+                $userPhoto = public_path('imgs/profile/').$currentPhoto;
+                if(file_exists($userPhoto)){
+                    @unlink($userPhoto);
+                }
             }
-        }
 
-        if(!empty($request->password)){
-            $request->merge(['password'=>Hash::make($request['password'])]);
-        }
+            if(!empty($request->password)){
+                $request->merge(['password'=>Hash::make($request['password'])]);
+            }
 
-        $user->update($request->all());
+            $user->update($request->all());
+        }
     }
 
     public function profile()
-    {
+    {        
         return auth('api')->user();
     }
 
@@ -105,16 +109,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant')){
+            $user = User::findOrFail($id);
 
-        $this->validate($request,[
-            'name' => 'required|string|max:191',
-            'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
-            'password' => 'sometimes|min:8',
-        ]);
+            $this->validate($request,[
+                'name' => 'required|string|max:191',
+                'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
+                'password' => 'sometimes|min:8',
+            ]);
 
-        $user->update($request->all());
-        return $id;
+            $user->update($request->all());
+            return $id;
+        }   
     }
 
     /**
@@ -132,16 +138,18 @@ class UserController extends Controller
     }
 
     public function search(){
-        if($search = \Request::get('q')){
-            $users = User::where(function($query) use ($search){
-                $query->where('name','LIKE',"%$search%")
-                ->orWhere('email','LIKE',"%$search%")
-                ->orWhere('type','LIKE',"%$search%");
-            })->latest()->paginate(20);
-        }else{
-            $users = User::latest()->paginate(5);
+        if(\Gate::allows('isAdmin')){
+            if($search = \Request::get('q')){
+                $users = User::where(function($query) use ($search){
+                    $query->where('name','LIKE',"%$search%")
+                    ->orWhere('email','LIKE',"%$search%")
+                    ->orWhere('type','LIKE',"%$search%");
+                })->latest()->paginate(20);
+            }else{
+                $users = User::latest()->paginate(5);
+            }
+            return $users;
         }
-        return $users;
     }
 
     public function getSetupIntent()

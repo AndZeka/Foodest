@@ -30,7 +30,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="{{ url('/') }}" class="nav-link">Home</a>
       </li>
     </ul>
 
@@ -187,7 +187,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            @if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant'))
+            @if(\Gate::allows('isAdmin'))
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <router-link to="/users" class="nav-link">
@@ -203,6 +203,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <router-link to="/my-restaurants" class="nav-link">
                   <i class="fas fa-utensils nav-icon blue"></i>
                   <p>Restaurants</p>
+                </router-link>
+              </li>
+            </ul>
+            @endif
+            @if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant'))
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to="/my-products" class="nav-link">
+                  <i class="fas fa-hamburger nav-icon blue"></i>
+                  <p>Foods</p>
                 </router-link>
               </li>
             </ul>

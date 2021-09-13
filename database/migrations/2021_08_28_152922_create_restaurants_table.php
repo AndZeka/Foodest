@@ -20,7 +20,7 @@ class CreateRestaurantsTable extends Migration
             $table->string('slug');
             $table->decimal('lat',10,4)->nullable();
             $table->decimal('lng',10,4)->nullable();
-            $table->text('photo');
+            $table->mediumText('photo');
             $table->string('address');
             $table->string('postcode')->nullable();
             $table->timestamps();

@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,7 @@ use App\Http\Controllers\API\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class,'home']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -45,4 +44,4 @@ Route::group(['middleware' => ['web','auth']], function() {
     Route::DELETE('/basket/{basket}', [BasketController::class, 'destroy'])->name('basket.destroy');
     
 });
-Route::get('/{any}', [HomeController::class,'index'])->where('any', '.*');
+Route::get('/{any}', [DashboardController::class,'index'])->where('any', '.*');

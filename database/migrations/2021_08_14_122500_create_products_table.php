@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('description');
-            $table->text('photo');
+            $table->mediumText('photo');
             $table->float('price');
             $table->float('sale_price');
             $table->foreignId('restaurant_id');

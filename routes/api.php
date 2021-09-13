@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\MyOrdersController;
 use App\Http\Controllers\API\MyRestaurantsController;
+use App\Http\Controllers\API\MyProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResources(['user'=>UserController::class, 'myorders'=>MyOrdersController::class, 'myrestaurants'=>MyRestaurantsController::class ]); 
+Route::apiResources([
+    'user'=>UserController::class, 
+    'myorders'=>MyOrdersController::class, 
+    'myrestaurants'=>MyRestaurantsController::class, 
+    'myproducts'=>MyProductsController::class
+]); 
 
 Route::get('profile',[UserController::class,'profile']);
 Route::put('profile',[UserController::class,'updateProfile']);
@@ -32,6 +38,9 @@ Route::put('photo',[MyRestaurantsController::class,'updatePhoto']);
 Route::get('role',[MyRestaurantsController::class,'getUserRole']);
 Route::get('restaurantCount',[MyRestaurantsController::class,'getNumberOfRestaurantsByUser']);
 Route::get('singleRestaurant',[MyRestaurantsController::class,'singleRestaurant']);
+Route::get('roleProduct',[MyProductsController::class,'getUserRole']);
+Route::get('findProduct',[MyProductsController::class,'search']);
+Route::put('foodPhoto',[MyProductsController::class,'updatePhoto']);
 
 //Checkout
 Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){

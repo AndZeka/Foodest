@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <div class="row mt-5" v-if="$gate.isAdmin() && role=='admin'">
+    <div class="row mt-5" v-if="$gate.isAdmin() && role == 'admin'">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <div>
-              <h3 class="card-title pt-2">Restaurants Table</h3>
+              <h3 class="card-title pt-2">Foods Table</h3>
             </div>
             <div class="d-flex flex-row align-items-center">
               <div class="card-tools mr-3">
@@ -39,31 +39,41 @@
                 <tr>
                   <th></th>
                   <th>ID</th>
-                  <th>User_ID</th>
+                  <th>Restaurant_ID</th>
                   <th>Name</th>
                   <th>Slug</th>
-                  <th>Address</th>          
-                  <th>Postcode</th>
+                  <th>Description</th>
+                  <th>Price</th>
                   <th>Registered At</th>
                   <th>Modify</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="myrestaurant in myrestaurants.data" :key="myrestaurant.id">
-                  <td><img class="img-circle img-profile" :src="myrestaurant.photo" alt="User Avatar" style="margin-top:0 !important; height: 25px !important"></td>
-                  <td>{{ myrestaurant.id }}</td>
-                  <td>{{ myrestaurant.user_id }}</td>
-                  <td>{{ myrestaurant.name }}</td>
-                  <td>{{ myrestaurant.slug }}</td>
-                  <td>{{ myrestaurant.address }}</td>
-                  <td>{{ myrestaurant.postcode }}</td>
-                  <td>{{ myrestaurant.created_at | myDate }}</td>
+                <tr
+                  v-for="myproduct in myproducts.data"
+                  :key="myproduct.id"
+                >
                   <td>
-                    <a href="#" @click="editModal(myrestaurant)">
+                    <img
+                      class="img-circle img-profile"
+                      :src="myproduct.photo"
+                      alt="User Avatar"
+                      style="margin-top: 0 !important; height: 50px !important"
+                    />
+                  </td>
+                  <td class="align-middle">{{ myproduct.id }}</td>
+                  <td class="align-middle text-center">{{ myproduct.restaurant_id }}</td>
+                  <td class="align-middle">{{ myproduct.name }}</td>
+                  <td class="align-middle">{{ myproduct.slug }}</td>
+                  <td class="align-middle">{{ myproduct.description }}</td>
+                  <td class="align-middle">{{ myproduct.price }}</td>
+                  <td class="align-middle">{{ myproduct.created_at | myDate }}</td>
+                  <td>
+                    <a href="#" @click="editModal(myproduct)">
                       <i class="fa fa-edit blue"></i>
                     </a>
                     /
-                    <a href="#" @click="deleteRestaurant(myrestaurant.id)">
+                    <a href="#" @click="deleteProduct(myproduct.id)">
                       <i class="fa fa-trash red"></i>
                     </a>
                   </td>
@@ -73,7 +83,10 @@
           </div>
           <!-- /.card-body -->
           <div class="card-footer">
-              <pagination :data="myrestaurants" @pagination-change-page="getResults"></pagination>
+            <pagination
+              :data="myproducts"
+              @pagination-change-page="getResults"
+            ></pagination>
           </div>
         </div>
         <!-- /.card -->
@@ -91,16 +104,20 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 v-show="!editmode" class="modal-title" id="addNewLabel">
-                Add New Restaurant
+                Add New Food
               </h5>
               <h5 v-show="editmode" class="modal-title" id="addNewLabel">
-                Update Restaurant's Info
+                Update Food's Info
               </h5>
               <button type="button" class="close" @click="hideModal">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form @submit.prevent="editmode ? updateRestaurant() : createRestaurant()">
+            <form
+              @submit.prevent="
+                editmode ? updateProduct() : createProduct()
+              "
+            >
               <div class="modal-body">
                 <div class="form-group">
                   <input
@@ -127,25 +144,25 @@
                 </div>
                 <div class="form-group">
                   <textarea
-                    v-model="form.address"
+                    v-model="form.description"
                     type="text"
-                    name="address"
+                    name="description"
                     class="form-control"
-                    :class="{ 'is-invalid': form.errors.has('address') }"
-                    placeholder="Address"
+                    :class="{ 'is-invalid': form.errors.has('description') }"
+                    placeholder="Description"
                   ></textarea>
-                  <has-error :form="form" field="address"></has-error>
+                  <has-error :form="form" field="description"></has-error>
                 </div>
                 <div class="form-group">
                   <input
-                    v-model="form.postcode"
+                    v-model="form.price"
                     type="text"
-                    name="postcode"
+                    name="price"
                     class="form-control"
-                    :class="{ 'is-invalid': form.errors.has('postcode') }"
-                    placeholder="Postcode"
+                    :class="{ 'is-invalid': form.errors.has('price') }"
+                    placeholder="Price"
                   />
-                  <has-error :form="form" field="postcode"></has-error>
+                  <has-error :form="form" field="price"></has-error>
                 </div>
                 <div class="form-group">
                   <input
@@ -158,8 +175,8 @@
                   <has-error :form="form" field="photo"></has-error>
                 </div>
               </div>
-              <input type="hidden">
-              <input type="hidden" v-model="form.photo" name="photo">
+              <input type="hidden" />
+              <input type="hidden" v-model="form.photo" name="photo" />
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" @click="hideModal">
                   Close
@@ -178,18 +195,21 @@
             </form>
           </div>
         </div>
-      </div>    
+      </div>
     </div>
-    <div class="row mt-5" v-if="$gate.isRestaurant() && role=='restaurant'">
+    <div class="row mt-5" v-if="$gate.isRestaurant() && role == 'restaurant'">
       <div class="col-md-12">
-        <div class="card">
+        <div class="card" v-if="hideBtn">
           <div class="card-header d-flex justify-content-between">
             <div>
-              <h3 class="card-title pt-2">Restaurants Table</h3>
+              <h3 class="card-title pt-2">Foods Table</h3>
             </div>
             <div class="d-flex flex-row align-items-center">
               <div class="card-tools">
-                <button v-show="hideBtn" class="btn btn-success text-white" @click="newModal" >
+                <button
+                  class="btn btn-success text-white"
+                  @click="newModal"                  
+                >
                   Add New <i class="fas fa-user-plus white"></i>
                 </button>
               </div>
@@ -202,31 +222,41 @@
                 <tr>
                   <th></th>
                   <th>ID</th>
-                  <th>User_ID</th>
+                  <th>Restaurant_ID</th>
                   <th>Name</th>
                   <th>Slug</th>
-                  <th>Address</th>          
-                  <th>Postcode</th>
+                  <th>Description</th>
+                  <th>Price</th>
                   <th>Registered At</th>
                   <th>Modify</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="myrestaurant in myrestaurants.data" :key="myrestaurant.id">
-                  <td><img class="img-circle img-profile" :src="myrestaurant.photo" alt="User Avatar" style="margin-top:0 !important; height: 25px !important"></td>
-                  <td>{{ myrestaurant.id }}</td>
-                  <td>{{ myrestaurant.user_id }}</td>
-                  <td>{{ myrestaurant.name }}</td>
-                  <td>{{ myrestaurant.slug }}</td>
-                  <td>{{ myrestaurant.address }}</td>
-                  <td>{{ myrestaurant.postcode }}</td>
-                  <td>{{ myrestaurant.created_at | myDate }}</td>
+                <tr
+                  v-for="myproduct in myproducts.data"
+                  :key="myproduct.id"
+                >
                   <td>
-                    <a href="#" @click="editModal(myrestaurant)">
+                    <img
+                      class="img-circle img-profile"
+                      :src="myproduct.photo"
+                      alt="User Avatar"
+                      style="margin-top: 0 !important; height: 50px !important"
+                    />
+                  </td>
+                  <td class="align-middle">{{ myproduct.id }}</td>
+                  <td class="align-middle text-center">{{ myproduct.restaurant_id }}</td>
+                  <td class="align-middle">{{ myproduct.name }}</td>
+                  <td class="align-middle">{{ myproduct.slug }}</td>
+                  <td class="align-middle">{{ myproduct.description }}</td>
+                  <td class="align-middle">{{ myproduct.price }}</td>
+                  <td class="align-middle">{{ myproduct.created_at | myDate }}</td>
+                  <td>
+                    <a href="#" @click="editModal(myproduct)">
                       <i class="fa fa-edit blue"></i>
                     </a>
                     /
-                    <a href="#" @click="deleteRestaurant(myrestaurant.id)">
+                    <a href="#" @click="deleteProduct(myproduct.id)">
                       <i class="fa fa-trash red"></i>
                     </a>
                   </td>
@@ -236,7 +266,17 @@
           </div>
           <!-- /.card-body -->
           <div class="card-footer">
-              <pagination :data="myrestaurants" @pagination-change-page="getResults"></pagination>
+            <pagination
+              :data="myproducts"
+              @pagination-change-page="getResults"
+            ></pagination>
+          </div>
+        </div>
+        <div class="card" v-else-if="!hideBtn">
+          <div class="card-header">
+            <div>
+              <h1 class="text-danger text-center font-weight-bold" style="font-size: 30px !important;"> You haven't opened any restaurant yet!</h1>
+            </div>            
           </div>
         </div>
         <!-- /.card -->
@@ -254,16 +294,20 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 v-show="!editmode" class="modal-title" id="addNewLabel">
-                Add New Restaurant
+                Add New Food
               </h5>
               <h5 v-show="editmode" class="modal-title" id="addNewLabel">
-                Update Restaurant's Info
+                Update Food's Info
               </h5>
               <button type="button" class="close" @click="hideModal">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form @submit.prevent="editmode ? updateRestaurant() : createRestaurant()">
+            <form
+              @submit.prevent="
+                editmode ? updateProduct() : createProduct()
+              "
+            >
               <div class="modal-body">
                 <div class="form-group">
                   <input
@@ -278,9 +322,9 @@
                 </div>
                 <div class="form-group">
                   <input
-                    type="text"                  
+                    type="text"
                     v-model="form.slug"
-                    name="slug"                    
+                    name="slug"
                     class="form-control"
                     :class="{ 'is-invalid': form.errors.has('slug') }"
                     placeholder="Slug"
@@ -289,25 +333,25 @@
                 </div>
                 <div class="form-group">
                   <textarea
-                    v-model="form.address"
+                    v-model="form.description"
                     type="text"
-                    name="address"
+                    name="description"
                     class="form-control"
-                    :class="{ 'is-invalid': form.errors.has('address') }"
-                    placeholder="Address"
+                    :class="{ 'is-invalid': form.errors.has('description') }"
+                    placeholder="Description"
                   ></textarea>
-                  <has-error :form="form" field="address"></has-error>
+                  <has-error :form="form" field="description"></has-error>
                 </div>
                 <div class="form-group">
                   <input
-                    v-model="form.postcode"
+                    v-model="form.price"
                     type="text"
-                    name="postcode"
+                    name="price"
                     class="form-control"
-                    :class="{ 'is-invalid': form.errors.has('postcode') }"
-                    placeholder="Postcode"
+                    :class="{ 'is-invalid': form.errors.has('price') }"
+                    placeholder="Price"
                   />
-                  <has-error :form="form" field="postcode"></has-error>
+                  <has-error :form="form" field="price"></has-error>
                 </div>
                 <div class="form-group">
                   <input
@@ -320,8 +364,8 @@
                   <has-error :form="form" field="photo"></has-error>
                 </div>
               </div>
-              <input type="hidden">
-              <input type="hidden" v-model="form.photo" name="photo">
+              <input type="hidden" />
+              <input type="hidden" v-model="form.photo" name="photo" />
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" @click="hideModal">
                   Close
@@ -340,58 +384,57 @@
             </form>
           </div>
         </div>
-      </div>    
+      </div>
     </div>
     <div v-if="!$gate.isAdminOrRestaurant()">
-        <not-found></not-found>
+      <not-found></not-found>
     </div>
   </div>
 </template>
-
 <script>
-import NotFound from './NotFound'
+import NotFound from "./NotFound";
+
 export default {
   data() {
     return {
-      role: '',
-      hideBtn: true,
+      hideBtn: false,
+      role: "",
       editmode: false,
-      myrestaurants: {},
+      myproducts: {},
       form: new Form({
         id: "",
-        user_id: "1",
+        restaurant_id: "1",
         name: "",
         slug: "",
-        address: "",
-        postcode: "",
+        description: "",
+        price: "",
         photo: "",
       }),
-      search:''
+      search: "",
     };
   },
   methods: {
-    searchit:_.debounce(()=>{
-      Fire.$emit('searching')
-    },100),
+    searchit: _.debounce(() => {
+      Fire.$emit("searching");
+    }, 100),
     getResults(page = 1) {
-      axios.get('api/myrestaurants?page=' + page)
-      .then(response => {
-          this.myrestaurants = response.data;            
+      axios.get("api/myproducts?page=" + page).then((response) => {
+        this.myproducts = response.data;
       });
     },
-    editModal(myrestaurant) {
+    editModal(myproduct) {
       this.editmode = true;
-      this.form.reset()
+      this.form.reset();
       $("#addNew").modal("show");
-      this.form.fill(myrestaurant);
+      this.form.fill(myproduct);
     },
     newModal() {
       this.editmode = false;
       this.showModal();
-      this.form.reset()
+      this.form.reset();
       $("#addNew").modal("show");
     },
-    deleteRestaurant(id) {
+    deleteProduct(id) {
       swal
         .fire({
           title: "Are you sure?",
@@ -405,9 +448,9 @@ export default {
         .then((result) => {
           if (result.isConfirmed) {
             this.form
-              .delete("api/myrestaurants/" + id)
+              .delete("api/myproducts/" + id)
               .then(() => {
-                swal.fire("Deleted!", "Your file has been deleted.", "success");
+                swal.fire("Deleted!", "Your food has been deleted.", "success");
                 Fire.$emit("AfterCreate");
               })
               .catch(() => {
@@ -422,15 +465,19 @@ export default {
     hideModal() {
       $("#addNew").modal("hide");
     },
-    loadRestaurants() {
-        if (this.$gate.isAdminOrRestaurant()) {
-            axios.get("api/myrestaurants").then(({ data }) => (this.myrestaurants = data));
-        }
+    loadProducts() {
+      if (this.$gate.isAdminOrRestaurant()) {
+        if(this.hideBtn){
+          axios
+          .get("api/myproducts")
+          .then(({ data }) => (this.myproducts = data));
+        }        
+      }
     },
-    updateRestaurant() {
+    updateProduct() {
       this.$Progress.start();
       this.form
-        .put("api/myrestaurants/" + this.form.id)
+        .put("api/myproducts/" + this.form.id)
         .then(() => {
           this.hideModal();
           toast.fire({
@@ -441,14 +488,14 @@ export default {
           Fire.$emit("AfterCreate");
         })
         .catch(() => {
-          console.log("ERRRR:: ",error.response.data);
+          console.log("ERRRR:: ", error.response.data);
           this.$Progress.fail();
         });
     },
-    createRestaurant() {
+    createProduct() {
       this.$Progress.start();
       this.form
-        .post("api/myrestaurants")
+        .post("api/myproducts")
         .then(() => {
           Fire.$emit("AfterCreate");
 
@@ -456,91 +503,76 @@ export default {
 
           toast.fire({
             icon: "success",
-            title: "Restaurant created successfully",
+            title: "Food created successfully",
           });
           this.$Progress.finish();
-          if(this.role == 'restaurant'){
-            this.hideBtn = false;
-          }
         })
-        .catch(error => {
-          console.log("ERRRR:: ",error.response.data);
+        .catch((error) => {
+          console.log("ERRRR:: ", error.response.data);
           this.$Progress.fail();
         });
     },
-    updatePhoto(e){
+    updatePhoto(e) {
       let file = e.target.files[0];
       // console.log(file);
       let reader = new FileReader();
-      if(file['size'] < 2111775){
-        reader.onloadend = (file)=>{
+      if (file["size"] < 2111775) {
+        reader.onloadend = (file) => {
           // console.log('Result', reader.result)
           this.form.photo = reader.result;
-        }
+        };
         reader.readAsDataURL(file);
-      }else{
-        swal.fire(
-            'Failed!',
-            'You are uploading a large file',
-            'error'
-        )
+      } else {
+        swal.fire("Failed!", "You are uploading a large file", "error");
       }
     },
-    searchInLowerCase() {
-      console.log(this.name);
-      return this.slug.toLowerCase().replace(/\s+/g,'-');
-    }
-  },
-  components:{
-    'not-found':NotFound
   },
   created() {
-    Fire.$on("searching", () => {
-      let query = this.search;
-      axios.get('api/findRestaurant?q='+query)
-      .then((data)=>{
-        this.myrestaurants=data.data
-      })
-      .catch(()=>{
-        console.log("ERRRR:: ",error.response.data);
-      })
-    });
-    this.loadRestaurants();
-    Fire.$on("AfterCreate", () => {
-      this.loadRestaurants();
-    });
-    axios.get('api/role')
-      .then((data)=>{
-        this.role = data.data;
-      })
-      .catch(()=>{
-        console.log("ERRRR:: ",error.response.data);
-      })
-      axios.get('api/restaurantCount')
-      .then((data)=>{
+    axios.get('api/restaurantCount')
+      .then((data)=>{        
         if(data.data >= 1 && this.role == 'restaurant')
           this.hideBtn = true;
       })
       .catch(()=>{
         console.log("ERRRR:: ",error.response.data);
       })
-    // setInterval(()=>this.loadRestaurants(),3000);
+    Fire.$on("searching", () => {
+      let query = this.search;
+      axios
+        .get("api/findProduct?q=" + query)
+        .then((data) => {
+          this.myproducts = data.data;
+        })
+        .catch(() => {
+          console.log("ERRRR:: ", error.response.data);
+        });
+    });
+    this.loadProducts();
+    Fire.$on("AfterCreate", () => {
+      this.loadProducts();
+    });
+    axios
+      .get("api/roleProduct")
+      .then((data) => {
+        this.role = data.data;
+      })
+      .catch(() => {
+        console.log("ERRRR:: ", error.response.data);
+      });
+
   },
   mounted: function () {
     axios.get('api/restaurantCount')
-      .then((data)=>{
+      .then((data)=>{        
         if(data.data >= 1 && this.role == 'restaurant')
-          this.hideBtn = false;
+          this.hideBtn = true;
       })
       .catch(()=>{
         console.log("ERRRR:: ",error.response.data);
       })
   },
+  components: {
+    "not-found": NotFound,
+  },
 };
 </script>
-
-<style scoped>
-.hideBtn{
-  display: none;
-}
-</style>

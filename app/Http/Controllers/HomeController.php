@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Restaurant;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
-    //
-    public function __construct()
+    public function home()
     {
-        $this->middleware('auth');
-    }
+        $restaurants = Restaurant::limit(6)->get();
+        $products = Product::limit(3)->get();
+        $products8 = Product::limit(8)->get();
 
-    public function index()
-    {
-        return view('dashboard');
+        return view('home', [
+            "products" => $products,
+            "restaurants" => $restaurants,
+            "products8" => $products8
+        ]);
     }
 }

@@ -86,39 +86,19 @@
               <div class="dotted4 os-animation" data-os-animation="bounceInRight" data-os-animation-delay="1s"></div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-4 col-sm-4">
-            <div class="slider clearfix os-animation" data-os-animation="fadeInDown
-        " data-os-animation-delay="0.20s">
-              <div class="img clearfix"> <img src="imgs/002.png" alt=""/> </div>
-              <div class="title clearfix">
-                <h3>Olister Combo<br/>
-                  pack lorem</h3>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
-                <a href="#">GRAB IT &#10152;</a> </div>
+          @foreach ($products as $product)
+            <div class="col-lg-4 col-md-4 col-sm-4">
+              <div class="slider clearfix os-animation" data-os-animation="fadeInDown
+                            " data-os-animation-delay="0.20s">
+                <div class="img clearfix"> <img src="{{ $product->photo }}" alt="" style="max-height:130px; min-height:130px"/> </div>
+                <div class="title clearfix">
+                  <h3>{{ $product->name }}<br /></h3>
+                  <p>{{ $product->description }}</p>
+                  <add-to-cart-button :product="{{ $product }}" />
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4">
-            <div class="slider clearfix os-animation" data-os-animation="fadeInDown
-        " data-os-animation-delay="0.50s">
-              <div class="img"> <img src="imgs/003.png" alt=""/> </div>
-              <div class="title">
-                <h3>Olister Combo<br/>
-                  pack lorem</h3>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
-                <a href="#">GRAB IT &#10152;</a> </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-4">
-            <div class="slider clearfix os-animation" data-os-animation="fadeInDown
-        " data-os-animation-delay="1s">
-              <div class="img"> <img src="imgs/oo1.png" alt=""/> </div>
-              <div class="title">
-                <h3>Olister Combo<br/>
-                  pack lorem</h3>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
-                <a href="#">GRAB IT &#10152;</a> </div>
-            </div>
-          </div>
+          @endforeach
         </div>
       </div>
     </section>
@@ -130,98 +110,32 @@
                       <h3 class="os-animation" data-os-animation="rollIn" data-os-animation-delay="1s">Top Restaurant </h3>
                   </div>
                   <div class="dotted6 os-animation" data-os-animation="bounceInRight" data-os-animation-delay="0.50s"></div>
-                  <div class="row">
+                  <div class="d-flex flex-wrap justify-content-between align-content-between">
+                    @foreach ($restaurants as $restaurant)
                       <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
-                          <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1s"> <a href="#"><img src="imgs/pizzhut.png" alt=""/> </a> </figure>
-                      </div>
-                      <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
-                          <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1.2s"> <a href="#"> <img src="imgs/SUB.png" alt="" /></a></figure>
-                      </div>
+                          <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1s"> <a href="{{ route('restaurant.products', ['slug' => $restaurant->slug]) }}"><img src="{{ $restaurant->photo }}" alt="{{ $restaurant->name }}" style="width: 165px; height: 110px"/> </a> </figure>
+                      </div>  
+                    @endforeach                  
                   </div>
-                  <!--row-->
-
-                  <div class="row">
-                      <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6" >
-                          <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1.4s"> <a href="#"> <img src="imgs/KFC.png" alt=""/></a> </figure>
-                      </div>
-                      <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
-                          <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1.6s"> <a href="#"><img src="imgs/papjohns.png" alt="" /></a> </figure>
-                      </div>
-                  </div>
-                  <!--row-->
-
-                  <div class="row">
-                      <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
-                          <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="1.8s"> <a href="#"><img src="imgs/dominos.png" alt="" /></a> </figure>
-                      </div>
-                      <div class="col-lg-6 col-md-8 col-sm-8 col-xs-6">
-                          <figure class="rest os-animation" data-os-animation="fadeInDown" data-os-animation-delay="2s"> <a href="#"><img src="imgs/barista.png" alt="" /></a> </figure>
-                      </div>
-                  </div>
-                  <!--row-->
-
-              </div>
-              <!---col-->
-
-              <div class="col-lg-8 col-md-8 col-sm-8">
+              </div>            
+              <div class="col-lg-8 col-md-8 col-sm-8 pl-5">
                   <div class="food">
                       <h3 class="os-animation" data-os-animation="rollIn" data-os-animation-delay="2.5s">Top Cuisines</h3>
                   </div>
                   <div class="dotted7 os-animation" data-os-animation="bounceInRight" data-os-animation-delay="2.8s"></div>
                   <div class="food1">
                       <div class="row">
-                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+                        @foreach ($products8 as $product)
+                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 pb-5">
                               <figure class="food os-animation" data-os-animation="fadeInDown
-        " data-os-animation-delay="3s"> <img src="imgs/pizz.png" alt=""/>
-                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
+                              " data-os-animation-delay="3.8s"> <img src="{{ $product->photo }}" alt="{{ $product->name }}" style="width:157px ;height: 130px"/>
+                                  <div class="order"> 
+                                    <p>{{ $product->name }}</p>
+                                    <add-to-cart-button :product="{{ $product }}" style="color: #E24425 !important;"/> 
+                                  </div>
                               </figure>
                           </div>
-                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                              <figure class="food os-animation" data-os-animation="fadeInDown
-          " data-os-animation-delay="3.2s"> <img src="imgs/burgar.png" alt="" />
-                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
-                              </figure>
-                          </div>
-                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                              <figure class="food os-animation" data-os-animation="fadeInDown
-          " data-os-animation-delay="3.4s"> <img src="imgs/donelt.png" alt="" />
-                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
-                              </figure>
-                          </div>
-                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                              <figure class="food os-animation" data-os-animation="fadeInDown
-            " data-os-animation-delay="3.6s"> <img src="imgs/sup.png" alt="" />
-                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
-                              </figure>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="food1">
-                      <div class="row">
-                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                              <figure class="food os-animation" data-os-animation="fadeInDown
-            " data-os-animation-delay="3.8s"> <img src="imgs/checken.png" alt=""/>
-                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
-                              </figure>
-                          </div>
-                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                              <figure class="food os-animation" data-os-animation="fadeInDown
-            " data-os-animation-delay="4s"> <img src="imgs/passta.png" alt=""/>
-                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
-                              </figure>
-                          </div>
-                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                              <figure class="food os-animation" data-os-animation="fadeInDown
-            " data-os-animation-delay="4.2s"> <img src="imgs/bhel.png" alt=""/>
-                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
-                              </figure>
-                          </div>
-                          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-                              <figure class="food os-animation" data-os-animation="fadeInDown
-              " data-os-animation-delay="4.4s"> <img src="imgs/past.png" alt=""/>
-                                  <div class="order"> <a href="#">Cuisine Name</a> </div>
-                              </figure>
-                          </div>
+                        @endforeach
                       </div>
                   </div>
               </div>

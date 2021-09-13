@@ -4,12 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Restaurant;
+use App\Models\Product;
 use DB;
 
-class MyRestaurantsController extends Controller
+class MyProductsController extends Controller
 {
-
     public function __construct(){
         $this->middleware('auth:api');
     }
@@ -21,10 +20,17 @@ class MyRestaurantsController extends Controller
     public function index()
     {
         $currentUser = auth()->user()->id;
+        $currentRestaurant =  DB::table('restaurants')
+            ->join('users', 'restaurants.user_id', '=', 'users.id')
+            ->select('restaurants.id')            
+            ->where('restaurants.user_id', '=', $currentUser)
+            ->first();
+        
+
         if(\Gate::allows('isAdmin')){
-            return Restaurant::latest()->paginate(5);
+            return Product::latest()->paginate(5);
         }else if(\Gate::allows('isRestaurant')){
-            return Restaurant::where('user_id', $currentUser)->latest()->paginate(5);
+            return Product::where('restaurant_id', $currentRestaurant->id)->latest()->paginate(5);
         }
     }
 
@@ -38,23 +44,28 @@ class MyRestaurantsController extends Controller
     {
         if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant')){
             $currentUser = auth()->user()->id;
+
+            $currentRestaurant = DB::table('restaurants')
+                ->join('users', 'restaurants.user_id', '=', 'users.id')
+                ->select('restaurants.id')            
+                ->where('restaurants.user_id', '=', $currentUser)
+                ->first();
+
             $this->validate($request,[
                 'name' => 'required|string|max:191',
-                'user_id' => 'required|integer',
+                'restaurant_id' => 'required|integer',
                 'slug' => 'required|string|max:191',
-                'address' => 'required|string|max:191',
-                'postcode' => 'string|max:191',
+                'description' => 'required',
+                'price' => 'required',
             ]);
 
-            return Restaurant::create([
-                'user_id'=>$currentUser,
-                'lat'=>1,
-                'lng'=>1,
+            return Product::create([
+                'restaurant_id'=>$currentRestaurant->id,
                 'name'=>$request['name'],
                 'slug'=>$request['slug'],
-                'address'=>$request['address'], 
-                'postcode'=>$request['postcode'],        
-                'photo'=>$request['photo']
+                'description'=>$request['description'], 
+                'price'=>$request['price'],           
+                'photo'=>$request['photo']     
             ]);
         }
     }
@@ -80,17 +91,26 @@ class MyRestaurantsController extends Controller
     public function update(Request $request, $id)
     {
         if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant')){
-            $restaurant = Restaurant::findOrFail($id);
+            $product = Product::findOrFail($id);
+
+            $currentUser = auth()->user()->id;
+
+            $currentRestaurant =  DB::table('restaurants')
+                ->join('users', 'restaurants.user_id', '=', 'users.id')
+                ->select('restaurants.id')            
+                ->where('restaurants.user_id', '=', $currentUser)
+                ->first();
 
             $this->validate($request,[
                 'name' => 'required|string|max:191',
-                'user_id' => 'required|integer',
+                'restaurant_id' => 'required|integer',
                 'slug' => 'required|string|max:191',
-                'address' => 'required|string|max:191',
-                'postcode' => 'string|max:191',
+                'description' => 'required',
+                'price' => 'required',
             ]);
+        
 
-            $restaurant->update($request->all());
+            $product->update($request->all());
             return $id;
         }
     }
@@ -104,8 +124,8 @@ class MyRestaurantsController extends Controller
     public function destroy($id)
     {
         $this->authorize('isAdminOrRestaurant');
-        $restaurant = Restaurant::findOrFail($id);
-        $restaurant->delete();
+        $product = Product::findOrFail($id);
+        $product->delete();
         return ['message'=>'Restaurant Deleted'];
     }
 
@@ -113,73 +133,48 @@ class MyRestaurantsController extends Controller
         return auth()->user()->type;
     }
 
-    public function getNumberOfRestaurantsByUser(){
-        if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant')){
-            $currentUser = auth()->user()->id;
-
-            $restaurantCount = DB::table('restaurants')
-                ->join('users', 'restaurants.user_id', '=', 'users.id')
-                ->select('restaurants.*')            
-                ->where('restaurants.user_id', '=', $currentUser)
-                ->count();
-
-            return $restaurantCount;
-        }
-    }
-
-    public function singleRestaurant(){
-        if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant')){
-            $currentUser = auth()->user()->id;
-
-            $restaurant = DB::table('restaurants')
-                ->join('users', 'restaurants.user_id', '=', 'users.id')
-                ->select('restaurants.*')            
-                ->where('restaurants.user_id', '=', $currentUser)
-                ->latest('restaurants.created_at');
-
-            return $restaurant;
-        }
-    }
-
     public function search(){
         if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant')){
             if($search = \Request::get('q')){
-                $myrestaurants = Restaurant::where(function($query) use ($search){
+                $myproducts = Product::where(function($query) use ($search){
                     $query->where('name','LIKE',"%$search%")
-                    ->orWhere('slug','LIKE',"%$search%");
+                    ->orWhere('slug','LIKE',"%$search%")
+                    ->orWhere('description','LIKE',"%$search%");
                 })->latest()->paginate(20);
             }else{
-                $myrestaurants = Restaurant::latest()->paginate(5);
+                $myproducts = Product::latest()->paginate(5);
             }
-            return $myrestaurants;
+            return $myproducts;
         }
     }
 
     public function updatePhoto(Request $request){
         if(\Gate::allows('isAdmin') || \Gate::allows('isRestaurant')){
-            $user = auth('api')->user();
+            $currentUser = auth()->user()->id;
 
-            $restaurant = DB::table('restaurants')
+            $currentRestaurant =  DB::table('restaurants')
                 ->join('users', 'restaurants.user_id', '=', 'users.id')
-                ->select('restaurants.*')            
-                ->where('restaurants.user_id', '=', $user->id)
+                ->select('restaurants.id')            
+                ->where('restaurants.user_id', '=', $currentUser)
                 ->first();
+            
+            $product = Product::where('restaurant_id', $currentRestaurant->id)->first();
 
-            $currentPhoto = $restaurant->photo;
+            $currentPhoto = $product->photo;
             if($request->photo != $currentPhoto){
                 $name = time().'.'.explode('/',explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
                 //Image intervation model class
-                \Image::make($request->photo)->save(public_path('imgs/restaurant/').$name);
+                \Image::make($request->photo)->save(public_path('imgs/foods/').$name);
                 
                 $request->merge(['photo' => $name]);
 
-                $restaurantPhoto = public_path('imgs/restaurant/').$currentPhoto;
-                if(file_exists($restaurantPhoto)){
-                    @unlink($restaurantPhoto);
+                $foodPhoto = public_path('imgs/foods/').$currentPhoto;
+                if(file_exists($foodPhoto)){
+                    @unlink($foodPhoto);
                 }
             }        
 
-            $restaurant->update($request->all());
+            $product->update($request->all());
         }
     }
 }
