@@ -21,6 +21,7 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('/', [HomeController::class,'home']);
+Route::get('/contact', [HomeController::class,'contact'])->name('home.contact');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

@@ -51,7 +51,8 @@ let routes = [
     { path: '/my-products', component: require('./components/MyProducts.vue').default },
     { path: '/track-order-map', component: require('./components/TrackOrderMap.vue').default },
     { path: '/my-orders', component: require('./components/MyOrders.vue').default },
-    { path: '*', component: require('./components/NotFound.vue').default }
+    { path: '/contact', component: require('./components/Contact.vue').default },
+    { path: '*', component: require('./components/NotFound.vue').default },
 ]
 
 import * as VueGoogleMaps from 'vue2-google-maps'
@@ -86,6 +87,7 @@ Vue.component('search-text-field', require('./components/SearchTextField.vue').d
 Vue.component('badge-icon', require('./components/BadgeIcon.vue').default);
 Vue.component('add-to-cart-button', require('./components/AddToCartButton.vue').default);
 Vue.component('stripe-payment-form', require('./components/StripePaymentForm.vue').default);
+Vue.component('contact-form', require('./components/Contact.vue').default);
 
 let Fire = new Vue();
 window.Fire = Fire;

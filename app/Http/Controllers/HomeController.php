@@ -20,4 +20,7 @@ class HomeController extends Controller
             "products8" => $products8
         ]);
     }
+    public function contact(){
+        return view('contact');
+    }
 }

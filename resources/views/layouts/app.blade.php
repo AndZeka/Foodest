@@ -87,7 +87,7 @@
                             </a>
                           </li>
                           <li><a href="#offer" class="{{ \Request::is('checkout') ? 'active' : '' }}"><span>Order</span> </a></li>
-                          <li><a href="#contact" class="{{ \Request::is('contact') ? 'active' : '' }}"><span>Contact</span></a></li>
+                          <li><a href="{{ route("home.contact") }}" class="{{ \Request::is('contact') ? 'active' : '' }}"><span>Contact</span></a></li>
                         </ul>
                       </nav>
                     </div>
