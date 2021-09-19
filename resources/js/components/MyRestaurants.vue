@@ -485,10 +485,6 @@ export default {
             'error'
         )
       }
-    },
-    searchInLowerCase() {
-      console.log(this.name);
-      return this.slug.toLowerCase().replace(/\s+/g,'-');
     }
   },
   components:{
@@ -515,15 +511,15 @@ export default {
       })
       .catch(()=>{
         console.log("ERRRR:: ",error.response.data);
-      })
-      axios.get('api/restaurantCount')
+    })
+    axios.get('api/restaurantCount')
       .then((data)=>{
         if(data.data >= 1 && this.role == 'restaurant')
           this.hideBtn = true;
       })
       .catch(()=>{
         console.log("ERRRR:: ",error.response.data);
-      })
+    })
     // setInterval(()=>this.loadRestaurants(),3000);
   },
   mounted: function () {

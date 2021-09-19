@@ -66,7 +66,7 @@
                   <td class="align-middle">{{ myproduct.name }}</td>
                   <td class="align-middle">{{ myproduct.slug }}</td>
                   <td class="align-middle">{{ myproduct.description }}</td>
-                  <td class="align-middle">{{ myproduct.price }}</td>
+                  <td class="align-middle">{{ myproduct.price }} $</td>
                   <td class="align-middle">{{ myproduct.created_at | myDate }}</td>
                   <td>
                     <a href="#" @click="editModal(myproduct)">
@@ -249,7 +249,7 @@
                   <td class="align-middle">{{ myproduct.name }}</td>
                   <td class="align-middle">{{ myproduct.slug }}</td>
                   <td class="align-middle">{{ myproduct.description }}</td>
-                  <td class="align-middle">{{ myproduct.price }}</td>
+                  <td class="align-middle">{{ myproduct.price }} $</td>
                   <td class="align-middle">{{ myproduct.created_at | myDate }}</td>
                   <td>
                     <a href="#" @click="editModal(myproduct)">
@@ -467,11 +467,9 @@ export default {
     },
     loadProducts() {
       if (this.$gate.isAdminOrRestaurant()) {
-        if(this.hideBtn){
           axios
           .get("api/myproducts")
-          .then(({ data }) => (this.myproducts = data));
-        }        
+          .then(({ data }) => (this.myproducts = data)); 
       }
     },
     updateProduct() {
@@ -528,14 +526,6 @@ export default {
     },
   },
   created() {
-    axios.get('api/restaurantCount')
-      .then((data)=>{        
-        if(data.data >= 1 && this.role == 'restaurant')
-          this.hideBtn = true;
-      })
-      .catch(()=>{
-        console.log("ERRRR:: ",error.response.data);
-      })
     Fire.$on("searching", () => {
       let query = this.search;
       axios
@@ -559,7 +549,14 @@ export default {
       .catch(() => {
         console.log("ERRRR:: ", error.response.data);
       });
-
+    axios.get('api/restaurantCount')
+      .then((data)=>{        
+        if(data.data >= 1 && this.role == 'restaurant')
+          this.hideBtn = true;
+      })
+      .catch(()=>{
+        console.log("ERRRR:: ",error.response.data);
+    })
   },
   mounted: function () {
     axios.get('api/restaurantCount')

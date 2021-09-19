@@ -51,7 +51,9 @@ let routes = [
     { path: '/my-products', component: require('./components/MyProducts.vue').default },
     { path: '/track-order-map', component: require('./components/TrackOrderMap.vue').default },
     { path: '/my-orders', component: require('./components/MyOrders.vue').default },
-    { path: '/contact', component: require('./components/Contact.vue').default },
+    { path: '/restaurant-orders', component: require('./components/RestaurantOrders.vue').default },
+    { path: '/add', component: require('./components/Contact.vue').default },
+    { path: '/emails', component: require('./components/EmailsList.vue').default },
     { path: '*', component: require('./components/NotFound.vue').default },
 ]
 

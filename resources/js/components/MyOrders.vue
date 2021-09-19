@@ -7,25 +7,6 @@
             <div>
               <h3 class="card-title pt-2">Orders History</h3>
             </div>
-            <div class="d-flex flex-row align-items-center">
-              <div class="card-tools mr-3">
-                <div class="input-group input-group-sm" style="width: 150px">
-                  <input
-                    type="search"
-                    name="table_search"
-                    @keyup="searchit"
-                    v-model="search"
-                    class="form-control float-right"
-                    placeholder="Search"
-                  />
-                  <div class="input-group-append">
-                    <button @click="searchit" class="btn btn-default">
-                      <i class="fas fa-search"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
           <!-- /.card-header -->
           <div class="card-body table-responsive p-0">
@@ -36,7 +17,6 @@
                   <th>Product</th>
                   <th>Quantity</th>
                   <th>Total Price</th>
-                  <th>Status</th>
                   <th>Date</th>
                 </tr>
               </thead>
@@ -46,7 +26,6 @@
                   <td>{{ order.name }}</td>
                   <td>{{ order.qty }}</td>
                   <td>{{ order.price }} $</td>
-                  <td>{{ order.status }}</td>
                   <td>{{ order.created_at | myDate  }}</td>
                 </tr>
               </tbody>
@@ -104,16 +83,6 @@ export default {
     'not-found':NotFound
     },
   created() {
-    Fire.$on("searching", () => {
-      let query = this.search;
-      axios.get('api/findOrder?q='+query)
-      .then((data)=>{
-        this.orders=data.data
-      })
-      .catch(()=>{
-
-      })
-    });
     this.loadorders();
     Fire.$on("AfterCreate", () => {
       this.loadorders();

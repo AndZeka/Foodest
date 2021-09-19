@@ -19,7 +19,6 @@ use App\Http\Controllers\DashboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', [HomeController::class,'home']);
 Route::get('/contact', [HomeController::class,'contact'])->name('home.contact');
 

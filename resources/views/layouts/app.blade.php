@@ -101,7 +101,7 @@
                                       <li><a href="{{ route('login') }}" class="text-sm underline">LOG IN</a></li>
               
                                       @if (Route::has('register'))
-                                          <li><a href="{{ route('register') }}" class="ml-4 text-sm underline">REGISTER</a></li>
+                                          <li><a href="{{ route('login') }}" class="ml-4 text-sm underline">REGISTER</a></li>
                                       @endif
                                   @endauth
                               </div>

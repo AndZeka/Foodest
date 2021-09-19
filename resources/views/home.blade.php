@@ -94,7 +94,12 @@
                 <div class="title clearfix">
                   <h3>{{ $product->name }}<br /></h3>
                   <p>{{ $product->description }}</p>
-                  <add-to-cart-button :product="{{ $product }}" />
+                  @auth
+                    <add-to-cart-button :product="{{ $product }}" />
+                  @endauth
+                  @guest
+                    <a href="{{ url('login') }}">Add to cart &#10152;</a>
+                  @endguest
                 </div>
               </div>
             </div>
@@ -107,7 +112,7 @@
           <div class="row">
               <div class="col-lg-4 col-md-4 col-sm-4">
                   <div class="restaurants">
-                      <h3 class="os-animation" data-os-animation="rollIn" data-os-animation-delay="1s">Top Restaurant </h3>
+                      <h3 class="os-animation" data-os-animation="rollIn" data-os-animation-delay="1s">Top Restaurants </h3>
                   </div>
                   <div class="dotted6 os-animation" data-os-animation="bounceInRight" data-os-animation-delay="0.50s"></div>
                   <div class="d-flex flex-wrap justify-content-between align-content-between">
@@ -131,7 +136,12 @@
                               " data-os-animation-delay="3.8s"> <img src="{{ $product->photo }}" alt="{{ $product->name }}" style="width:157px ;height: 130px"/>
                                   <div class="order"> 
                                     <p>{{ $product->name }}</p>
-                                    <add-to-cart-button :product="{{ $product }}" style="color: #E24425 !important;"/> 
+                                    @auth
+                                      <add-to-cart-button :product="{{ $product }}" style="color: #E24425 !important;" />
+                                    @endauth
+                                    @guest
+                                      <a href="{{ url('login') }}" style="color: #E24425 !important;">Add to cart &#10152;</a>
+                                    @endguest
                                   </div>
                               </figure>
                           </div>
