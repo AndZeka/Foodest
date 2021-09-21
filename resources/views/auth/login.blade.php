@@ -220,12 +220,12 @@
                     autocomplete="current-password" >
 
                     <div class="flex items-center justify-end mt-4">
-                        @if (Route::has('password.request'))
+                        {{-- @if (Route::has('password.request'))
                         <a class="text-secondary"
                             href="{{ route('password.request') }}">
                             {{ __('Forgot your password?') }}
                         </a>
-                        @endif
+                        @endif --}}
                         <input type="submit" value="Login" >
                     </div>
                 </form>
