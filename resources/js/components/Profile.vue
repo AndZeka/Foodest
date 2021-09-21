@@ -77,7 +77,7 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="password" class="col-sm-12 col-form-label">Passport (leave empty if not changing)</label>
+                  <label for="password" class="col-sm-12 col-form-label">Password (leave empty if not changing)</label>
                   <div class="col-sm-12">
                     <input type="password" v-model="form.password" name="password" class="form-control" id="password" placeholder="Password" :class="{'is-invalid':form.errors.has('password')}">
                      <has-error :form="form" field="password"></has-error>

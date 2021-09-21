@@ -26,7 +26,7 @@
                 </div>
               </div>
               <div class="card-tools">
-                <button class="btn btn-success text-white" @click="newModal">
+                <button class="btn btn-success text-white" @click="newModal" style="margin: 0 !important;">
                   Add New <i class="fas fa-user-plus white"></i>
                 </button>
               </div>
@@ -168,6 +168,7 @@
                   v-show="!editmode"
                   type="submit"
                   class="btn btn-success"
+                  style="margin: 0 !important;"
                 >
                   Create
                 </button>
@@ -189,7 +190,7 @@
             </div>
             <div class="d-flex flex-row align-items-center">
               <div class="card-tools">
-                <button v-show="hideBtn" class="btn btn-success text-white" @click="newModal" >
+                <button v-show="!hideBtn" class="btn btn-success text-white" @click="newModal" style="margin: 0 !important;">
                   Add New <i class="fas fa-user-plus white"></i>
                 </button>
               </div>
@@ -330,6 +331,7 @@
                   v-show="!editmode"
                   type="submit"
                   class="btn btn-success"
+                  style="margin: 0 !important;"
                 >
                   Create
                 </button>
@@ -526,7 +528,7 @@ export default {
     axios.get('api/restaurantCount')
       .then((data)=>{
         if(data.data >= 1 && this.role == 'restaurant')
-          this.hideBtn = false;
+          this.hideBtn = true;
       })
       .catch(()=>{
         console.log("ERRRR:: ",error.response.data);

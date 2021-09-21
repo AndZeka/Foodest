@@ -55,18 +55,12 @@
             <div class="row" id="home">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="logo">
-                  <h1><a href="{{ url('/') }}"><img class="w-25" src="/imgs/TMPS000136.png" alt="" /></a></h1>
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="contact">
-                  <p>Questions? Call us Toll-free!<span class="number"><a href="#">1800-0000-7777</a></span><span
-                      class="time">(11AM to 11PM)</span></p>
+                  <h1><a href="{{ url('/') }}"><img class="w-10 mt-2" src="/imgs/logo.png" alt=""  /></a></h1>
                 </div>
               </div>
             </div>
           </div>
-            <section class="saction1">
+            <section class="saction1 mt-2">
               <div class="container">
                 <div class="row">
                   <div class="col-lg-12 col-md-12 col-sm-12">
@@ -169,16 +163,6 @@
                   </div>
                 </div>
               </footer>
-            <footer class="saction9">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                      <div class="email">&copy; All right reserved 2014  /  FoodFinder </div>
-                      <p class="freetemplates">Free Template by <a href="http://freetemplates.pro/">FreeTemplates.pro</a></p>
-                    </div>
-                  </div>
-                </div>
-            </footer>
         </div>
     </body>
 </html>

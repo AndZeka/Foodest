@@ -69,6 +69,10 @@ class User extends Authenticatable
         return $this->hasMany(Basket::class);
     }
 
+    public function comment(){
+        return $this->hasMany(Comments::class);
+    }
+
     public function getBasketTotal()
     {
         return $this->basket->sum(function ($item) {

@@ -26,7 +26,7 @@
                 </div>
               </div>
               <div class="card-tools">
-                <button class="btn btn-success text-white" @click="newModal">
+                <button class="btn btn-success text-white" @click="newModal" style="margin: 0 !important;">
                   Add New <i class="fas fa-user-plus white"></i>
                 </button>
               </div>
@@ -167,6 +167,7 @@
                   v-show="!editmode"
                   type="submit"
                   class="btn btn-success"
+                  style="margin: 0 !important;"
                 >
                   Create
                 </button>

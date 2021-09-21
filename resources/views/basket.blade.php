@@ -30,8 +30,6 @@
                                             style="width: 72px; height: 72px;"> </a>
                                     <div class="media-body ml-1">
                                         <h4 class="media-heading"><a href="#">{{ $basket->product->name }}</a></h4>
-                                        <h5 class="media-heading"> by <a href="#">Brand name</a></h5>
-                                        <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
                                     </div>
                                 </div>
                             </td>

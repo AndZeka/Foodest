@@ -118,6 +118,10 @@ class UserController extends Controller
                 'password' => 'sometimes|min:8',
             ]);
 
+            if(!empty($request->password)){
+                $request->merge(['password'=>Hash::make($request['password'])]);
+            }
+
             $user->update($request->all());
             return $id;
         }   

@@ -7,6 +7,7 @@ use App\Http\Controllers\API\MyOrdersController;
 use App\Http\Controllers\API\MyRestaurantsController;
 use App\Http\Controllers\API\MyProductsController;
 use App\Http\Controllers\API\RestaurantOrdersController;
+use App\Http\Controllers\API\InfoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::get('singleRestaurant',[MyRestaurantsController::class,'singleRestaurant'
 Route::get('roleProduct',[MyProductsController::class,'getUserRole']);
 Route::get('findProduct',[MyProductsController::class,'search']);
 Route::put('foodPhoto',[MyProductsController::class,'updatePhoto']);
+Route::get('info',[InfoController::class,'index']);
 
 //Checkout
 Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){

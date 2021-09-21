@@ -23,7 +23,7 @@
                   <td>{{ email.name }}</td>
                   <td>{{ email.subject }}</td>
                   <td>{{ email.email }}</td>
-                  <td>{{ email.message }} $</td>
+                  <td>{{ email.message }}</td>
                 </tr>
               </tbody>
             </table>

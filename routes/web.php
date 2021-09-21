@@ -8,6 +8,8 @@ use App\Http\Controllers\BasketController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\InfoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +24,11 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', [HomeController::class,'home']);
 Route::get('/contact', [HomeController::class,'contact'])->name('home.contact');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
 
 Route::post('restaurants', [RestaurantController::class, 'index'])->name('search.restaurants');
-
 
 Route::group(['middleware' => ['web','auth']], function() {
     
@@ -35,6 +36,8 @@ Route::group(['middleware' => ['web','auth']], function() {
     //Basket
     Route::get('/basket', [BasketController::class, 'index'])->name('basket.index');
     Route::post('/basket', [BasketController::class, 'store'])->name('basket.store');
+
+    Route::post('/restaurant/{slug}', [CommentController::class, 'store'])->name('comment.store');
 
     //Checkout
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');

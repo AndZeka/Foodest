@@ -26,7 +26,7 @@
                 </div>
               </div>
               <div class="card-tools">
-                <button class="btn btn-success text-white" @click="newModal">
+                <button  class="btn btn-success text-white" style="margin: 0 !important;" @click="newModal" >
                   Add New <i class="fas fa-user-plus white"></i>
                 </button>
               </div>
@@ -184,7 +184,7 @@
                 <button
                   v-show="!editmode"
                   type="submit"
-                  class="btn btn-success"
+                  class="btn btn-success" style="margin: 0 !important;"
                 >
                   Create
                 </button>
@@ -208,7 +208,8 @@
               <div class="card-tools">
                 <button
                   class="btn btn-success text-white"
-                  @click="newModal"                  
+                  @click="newModal"    
+                  style="margin: 0 !important;"              
                 >
                   Add New <i class="fas fa-user-plus white"></i>
                 </button>
@@ -374,6 +375,7 @@
                   v-show="!editmode"
                   type="submit"
                   class="btn btn-success"
+                  style="margin: 0 !important;"
                 >
                   Create
                 </button>
@@ -397,7 +399,7 @@ import NotFound from "./NotFound";
 export default {
   data() {
     return {
-      hideBtn: false,
+      hideBtn: true,
       role: "",
       editmode: false,
       myproducts: {},
